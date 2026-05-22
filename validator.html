@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валидность кода | E-BookStudy</title>
+    <style>
+        /* Базовые стили — полное соответствие сайту */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #FFFBD6;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+
+        /* Шапка сайта */
+        .header {
+            background-color: #D3D3D3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            border-bottom: 1px solid #aaa;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #FF8C00;
+        }
+        .nav a {
+            margin: 0 12px;
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav a:hover {
+            color: #FF8C00;
+        }
+        .theme-icon {
+            font-size: 24px;
+            cursor: default;
+        }
+
+        /* Контейнер + боковое меню */
+        .wrapper {
+            display: flex;
+            max-width: auto;
+            margin: 0 auto;
+            background: #FFFBD6;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #e9e9cf;
+            border-right: 1px solid #ccc;
+            padding: 20px 10px;
+        }
+        .sidebar-item {
+            display: block;
+            background: #ecece0;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 20px;
+            border: 1px solid #b3b38c;
+            text-decoration: none;
+            color: #2c2c2c;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .sidebar-item.active {
+            background: #FF8C00;
+            color: white;
+            font-weight: bold;
+            border-color: #FF8C00;
+        }
+        .sidebar-item:hover {
+            background: #FFD58C;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px;
+        }
+
+        h1 {
+            color: #FF8C00;
+            font-size: 32px;
+            margin-bottom: 12px;
+            border-left: 5px solid #FF8C00;
+            padding-left: 20px;
+        }
+        .desc {
+            font-size: 18px;
+            color: #4a4a2a;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #c0c09a;
+            padding-bottom: 12px;
+        }
+
+        /* стили для блоков с теорией */
+        .theory-block {
+            background: #fffdf0;
+            border-radius: 32px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #f0e2c5;
+        }
+        .theory-block h2 {
+            font-size: 26px;
+            color: #b45f06;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #FF8C00;
+            padding-left: 16px;
+        }
+        .theory-block h3 {
+            font-size: 22px;
+            margin: 20px 0 12px 0;
+            color: #c55a11;
+        }
+        .code-example {
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .inline-code {
+            background: #e9e2cd;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #a53f00;
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 20px 0;
+        }
+        .info-card {
+            background: #fef5e8;
+            border-radius: 24px;
+            padding: 18px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .badge {
+            background: #FF8C00;
+            color: white;
+            border-radius: 30px;
+            padding: 3px 12px;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .error-list {
+            background: #ffe8e0;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin: 15px 0;
+        }
+        .warning-list {
+            background: #fff0cf;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin: 15px 0;
+        }
+        .task-block {
+            background: #fff0cf;
+            border-radius: 28px;
+            padding: 24px;
+            margin: 35px 0;
+            border-left: 8px solid #FF8C00;
+        }
+        .button-link {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            transition: 0.2s;
+        }
+        .button-link:hover {
+            background: #e07a00;
+            transform: scale(1.02);
+        }
+        hr {
+            margin: 25px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ffda9e, transparent);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #ddd8b0;
+            border-radius: 48px;
+            font-size: 14px;
+            color: #4f4f2f;
+        }
+        @media (max-width: 800px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .sidebar-item {
+                width: auto;
+                margin: 0;
+            }
+            .main-content {
+                padding: 20px;
+            }
+        }
+        .search-box {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-input {
+            width: 350px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background-color: #D3D3D3;
+            outline: none;
+            font-size: 14px;
+        }
+        .btn-search {
+            padding: 12px 35px;
+            border-radius: 25px;
+            border: none;
+            background-color: #999;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .btn-search:hover {
+            background-color: #888;
+        }
+        .highlight {
+            background-color: #FFD700;
+            color: black;
+            border-radius: 2px;
+        }
+        .validator-card {
+            background: linear-gradient(135deg, #fff8e8, #fff2de);
+            border-radius: 28px;
+            padding: 24px;
+            text-align: center;
+            border: 2px solid #ffe0aa;
+            margin: 20px 0;
+        }
+        .validator-link {
+            font-size: 20px;
+            word-break: break-all;
+        }
+        .plugin-demo {
+            background: #2d2d24;
+            border-radius: 16px;
+            padding: 12px 18px;
+            color: #f8f8f2;
+            font-family: monospace;
+            position: relative;
+        }
+        .wavy-error {
+            text-decoration: underline;
+            text-decoration-color: #ffaa00;
+            text-decoration-style: wavy;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"> <a href="index.html"> E-Book<span>Study</span></a></div>
+        <div class="theme-icon"></div>
+    </header>
+
+    <div class="wrapper">
+        <!-- Боковое меню — как в предыдущих работах -->
+        <aside class="sidebar">
+            <a href="intro.html" class="sidebar-item">Вводное занятие</a>
+            <a href="vscode.html" class="sidebar-item">Visual Studio Code</a>
+            <a href="practice.html" class="sidebar-item">Тренажер</a>
+            <a href="links.html" class="sidebar-item">Ссылки и изображения</a>
+            <a href="tables.html" class="sidebar-item">Таблицы</a>
+            <a href="validator.html" class="sidebar-item">Валидность кода</a>
+            <a href="css.html" class="sidebar-item">Основы CSS</a>
+            <a href="text.html" class="sidebar-item">Текст</a>
+            <a href="margins.html" class="sidebar-item active">Отступы</a>
+            <a href="forms.html" class="sidebar-item">Формы</a>
+            <a href="website.html" class="sidebar-item">Мой первый сайт</a>
+            <a href="github.html" class="sidebar-item">GitHub</a>
+            <a href="melodia.html" class="sidebar-item">Верстка ЖК Мелодия</a>
+        </aside>
+
+        <main class="main-content">
+            <h1>✅ Валидность кода HTML</h1>
+            <p class="desc">Проверка на соответствие стандартам W3C. Лектор: Хаятова Лилия Рэхтямовна</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Поиск">
+                <button class="btn-search">Найти</button>
+            </div>
+
+            <!-- 1. Зачем нужна валидация -->
+            <div class="theory-block">
+                <h2>📌 1. Зачем нужна валидация кода?</h2>
+                <p><strong>Валидный HTML-код</strong> — это код, написанный по спецификации <strong>W3C</strong> (World Wide Web Consortium), в которой собраны стандарты и рекомендации по удобству и универсальности Всемирной сети.</p>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📖 Аналогия</span>
+                        <p>Правила валидного HTML похожи на правила русского языка. Если вы не закроете тег (как не закончите абзац текста) — нарушится структура и смысловая составляющая.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🎯 Почему это важно?</span>
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>✅ Браузеры лучше обрабатывают код</li>
+                            <li>✅ Страницы быстрее загружаются</li>
+                            <li>✅ Поисковые системы верно понимают смысл тегов</li>
+                            <li>✅ Другим разработчикам легче читать код</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="code-example">
+                    &lt;!-- НЕВАЛИДНЫЙ код (закрывающий тег потерян) --&gt;<br>
+                    &lt;p&gt;Текст без закрывающего тега<br><br>
+                    &lt;!-- ВАЛИДНЫЙ код --&gt;<br>
+                    &lt;p&gt;Правильный абзац с закрытием&lt;/p&gt;
+                </div>
+            </div>
+
+            <!-- 2. Валидатор W3C -->
+            <div class="theory-block">
+                <h2>🔧 2. Валидатор W3C — главный помощник</h2>
+                <p><strong>Валидатор W3C</strong> — это онлайн-инструмент, который автоматически проверяет HTML-код на соответствие стандартам. Используется повсеместно, так как создан теми, кто разрабатывает спецификации языка.</p>
+                
+                <h3>📥 Три способа проверки</h3>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🌐 По URL</span>
+                        <p>Введите адрес сайта, который уже опубликован в интернете.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📁 Загрузить файл</span>
+                        <p>Отправьте HTML-файл с компьютера.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📝 Вставить код</span>
+                        <p>Скопируйте и вставьте код в специальное поле.</p>
+                    </div>
+                </div>
+
+                <div class="validator-card">
+                    <div style="font-size: 48px; margin-bottom: 10px;">🔍</div>
+                    <h3 style="color: #b45f06; margin-bottom: 10px;">The W3C Markup Validation Service</h3>
+                    <p class="validator-link"><a href="https://validator.w3.org/" target="_blank" style="color: #FF8C00; text-decoration: none; font-weight: bold;">https://validator.w3.org/</a></p>
+                    <a href="https://validator.w3.org/" target="_blank" class="button-link" style="margin-top: 15px; display: inline-block;">🚀 Открыть валидатор</a>
+                </div>
+
+                <h3>📊 Что проверяет валидатор?</h3>
+                <p>Валидатор оценивает <strong>синтаксическую составляющую</strong> кода: проверяет пропущенные или ошибочные теги, верное закрытие блоков, вложенность.</p>
+                
+                <div class="two-columns">
+                    <div class="warning-list">
+                        <span class="badge" style="background: #d4942b;">⚠️ Предупреждения</span>
+                        <p style="margin-top: 12px;">Незначительные неточности в коде, которые не сломают сайт, но не соответствуют стандартам. Например, рекомендация добавить атрибут <span class="inline-code">type</span> для стилей.</p>
+                    </div>
+                    <div class="error-list">
+                        <span class="badge" style="background: #c45100;">❌ Ошибки</span>
+                        <p style="margin-top: 12px;">Серьёзные проблемы, которые могут повлиять на работу кода. Например, неверная вложенность тегов, незакрытые элементы, отсутствие обязательных атрибутов (<span class="inline-code">alt</span>, <span class="inline-code">title</span>).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Типичные ошибки -->
+            <div class="theory-block">
+                <h2>⚠️ 3. Типичные ошибки в HTML</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🔴 Незакрытые теги</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            &lt;p&gt;Текст без закрытия
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🔴 Отсутствие alt у &lt;img&gt;</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            &lt;img src="photo.jpg"&gt;
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🔴 Неверная вложенность</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            &lt;strong&gt;&lt;em&gt;Текст&lt;/strong&gt;&lt;/em&gt;
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🔴 Пустой &lt;title&gt;</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            &lt;title&gt;&lt;/title&gt;
+                        </div>
+                    </div>
+                </div>
+                <div class="code-example">
+                    &lt;!-- Пример фрагмента с ошибками, который проверим на валидаторе --&gt;<br>
+                    &lt;!DOCTYPE html&gt;<br>
+                    &lt;html&gt;<br>
+                    &lt;head&gt;<br>
+                    &nbsp;&nbsp;&lt;title&gt;&lt;/title&gt;  &lt;!-- Ошибка: пустой title --&gt;<br>
+                    &lt;/head&gt;<br>
+                    &lt;body&gt;<br>
+                    &nbsp;&nbsp;&lt;h1&gt;Заголовок<br>  &lt;!-- Ошибка: незакрытый h1 --&gt;<br>
+                    &nbsp;&nbsp;&lt;img src="logo.png"&gt;  &lt;!-- Ошибка: нет alt --&gt;<br>
+                    &lt;/body&gt;
+                </div>
+            </div>
+
+            <!-- 4. Плагины-хинтеры (HTMLHint) -->
+            <div class="theory-block">
+                <h2>💡 4. Плагины-хинтеры для редакторов</h2>
+                <p>Помимо классического валидатора, существуют <strong>хинтеры</strong> — плагины для редакторов кода, которые подчёркивают ошибки прямо при написании кода.</p>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🔌 HTMLHint для VS Code</span>
+                        <p>Плагин, который подсвечивает ошибки <strong>жёлтой волнистой линией</strong> прямо в редакторе. Позволяет видеть и исправлять проблемы мгновенно.</p>
+                        <div class="plugin-demo" style="margin-top: 12px;">
+                            &lt;p&gt;Текст с <span class="wavy-error">незакрытым тегом</span><br>
+                            &lt;img src="photo.jpg" <span class="wavy-error">alt=""</span>&gt;
+                        </div>
+                        <p style="margin-top: 10px; font-size: 13px;">🟡 Жёлтая волнистая линия — сигнал о проблеме</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📦 Другие полезные инструменты</span>
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li><strong>ESLint</strong> — для JavaScript</li>
+                            <li><strong>Stylelint</strong> — для CSS</li>
+                            <li><strong>Prettier</strong> — автоформатирование</li>
+                        </ul>
+                        <div class="code-example" style="margin-top: 12px; font-size: 12px;">
+                            # Установка HTMLHint в VS Code:<br>
+                            Ctrl+Shift+X → поиск "HTMLHint" → установить
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Практическое задание -->
+            <div class="task-block">
+                <h3 style="color:#a55302; margin-top:0;">📌 Практическое задание</h3>
+                <p><strong>Проверьте статью, которую вы выполняли на одном из прошлых занятий, на валидаторе W3C.</strong></p>
+                <div class="two-columns" style="margin: 15px 0;">
+                    <div class="info-card">
+                        <span class="badge">📄 Задание 1</span>
+                        <p>Возьмите любую ранее созданную HTML-страницу (например, статью или страницу со ссылками).</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🔍 Задание 2</span>
+                        <p>Откройте <a href="https://validator.w3.org/" target="_blank" style="color:#FF8C00;">validator.w3.org</a> и проверьте код (через загрузку файла или прямой ввод).</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">✏️ Задание 3</span>
+                        <p>Исправьте все ошибки и предупреждения, которые найдёт валидатор. Повторите проверку до чистого результата.</p>
+                    </div>
+                </div>
+                <p><strong>Дополнительное задание:</strong> Установите плагин <strong>HTMLHint</strong> в VS Code и убедитесь, что ошибки подсвечиваются прямо при наборе кода.</p>
+                <a href="https://validator.w3.org/" target="_blank" class="button-link" style="background:#bb741f;">🌐 Открыть валидатор W3C</a>
+                <a href="#" class="button-link" style="background:#e07a00;" onclick="alert('Установите HTMLHint в VS Code через панель расширений (Ctrl+Shift+X)'); return false;">🔌 Установить HTMLHint</a>
+                <hr>
+                <p><span class="badge" style="background:#b4682d;">✅ Результат:</span> после исправления ошибок сохраните страницу и убедитесь, что она проходит валидацию. Чистый валидный код — признак профессионализма!</p>
+            </div>
+
+            <!-- 6. Дополнительные рекомендации -->
+            <div class="theory-block">
+                <h2>📚 5. Рекомендации по поддержанию чистоты кода</h2>
+                <ul style="margin-left: 22px;">
+                    <li>Всегда закрывайте теги, даже одиночные (<span class="inline-code">&lt;img /&gt;</span>, <span class="inline-code">&lt;br /&gt;</span> — в XHTML, в HTML5 необязательно, но для единообразия полезно).</li>
+                    <li>Добавляйте атрибут <span class="inline-code">alt</span> для всех изображений — это важно для доступности и SEO.</li>
+                    <li>Следите за правильной вложенностью: вложенные теги должны закрываться в обратном порядке.</li>
+                    <li>Используйте семантические теги (<span class="inline-code">&lt;header&gt;, &lt;main&gt;, &lt;article&gt;</span>) вместо универсальных <span class="inline-code">&lt;div&gt;</span> где это возможно.</li>
+                    <li>Перед публикацией сайта всегда прогоняйте его через валидатор.</li>
+                    <li>Настройте автоформатирование (Prettier) и хинтер (HTMLHint) в редакторе кода.</li>
+                </ul>
+                <div class="info-card" style="margin-top: 15px;">
+                    <span class="badge">🔗 Полезные ссылки</span>
+                    <p style="margin-top: 8px;">
+                        📘 <a href="https://validator.w3.org/" target="_blank" style="color:#b86f1a;">W3C Markup Validation Service</a><br>
+                        📘 <a href="https://html5book.ru/html-html5/" target="_blank" style="color:#b86f1a;">html5book.ru — справочник по HTML</a><br>
+                        📘 <a href="https://marketplace.visualstudio.com/items?itemName=mkaufman.HTMLHint" target="_blank" style="color:#b86f1a;">HTMLHint для VS Code</a>
+                    </p>
+                </div>
+            </div>
+
+            <footer>
+                📘 E-BookStudy · Валидность кода. Пишите чистый, стандартизированный HTML, который будут любить браузеры и поисковые системы.
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Простая функция поиска и подсветки (как на других страницах)
+        function performSearch(inputElement, container) {
+            if (!inputElement || !container) return;
+            const query = inputElement.value.trim();
+            removeHighlights();
+            if (query === "") return;
+
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const nodesToReplace = [];
+
+            while (node = walker.nextNode()) {
+                if (node.parentNode.tagName === 'SCRIPT' ||
+                    node.parentNode.tagName === 'STYLE' ||
+                    node.parentNode.tagName === 'INPUT' ||
+                    node.parentNode.tagName === 'TEXTAREA') continue;
+
+                if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            nodesToReplace.forEach(node => {
+                const span = document.createElement('span');
+                span.innerHTML = node.textContent.replace(regex, '<mark class="highlight">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+
+            const firstResult = container.querySelector('.highlight');
+            if (firstResult) {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert("Ничего не найдено");
+            }
+        }
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(h => {
+                const parent = h.parentNode;
+                const text = parent.textContent;
+                const textNode = document.createTextNode(text);
+                parent.replaceWith(textNode);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('.main-content');
+            if (!main) return;
+
+            document.querySelectorAll('.btn-search').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const searchBox = btn.closest('.search-box');
+                    const input = searchBox.querySelector('.search-input');
+                    performSearch(input, main);
+                });
+            });
+
+            document.querySelectorAll('.search-input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchBox = input.closest('.search-box');
+                        const btn = searchBox.querySelector('.btn-search');
+                        if (btn) btn.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

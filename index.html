@@ -1,0 +1,588 @@
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Главная страница | E-BookStudy</title>
+        <style>
+            /* ПОЛНОСТЬЮ ЕДИНЫЙ СТИЛЬ С INTRO.HTML */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Segoe UI', 'Arial', sans-serif;
+                background-color: #FFFBD6;
+                color: #2c2c2c;
+                line-height: 1.5;
+            }
+
+            /* Шапка */
+            .header {
+                background-color: #D3D3D3;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 40px;
+                border-bottom: 1px solid #aaa;
+                flex-wrap: wrap;
+            }
+            .logo {
+                font-size: 26px;
+                font-weight: bold;
+            }
+            .logo span {
+                color: #FF8C00;
+            }
+            .nav a {
+                margin: 0 12px;
+                text-decoration: none;
+                color: #1e1e1e;
+                font-weight: 500;
+                transition: 0.2s;
+            }
+            .nav a:hover {
+                color: #FF8C00;
+            }
+            .theme-icon {
+                font-size: 24px;
+                cursor: pointer;
+            }
+
+            /* Боковое меню */
+            .wrapper {
+                display: flex;
+                max-width: auto;
+                margin: 0 auto;
+                background: #FFFBD6;
+            }
+            .sidebar {
+                width: 260px;
+                background-color: #e9e9cf;
+                border-right: 1px solid #ccc;
+                padding: 20px 10px;
+            }
+            .sidebar-item {
+                display: block;
+                background: #ecece0;
+                margin-bottom: 10px;
+                padding: 10px 12px;
+                border-radius: 20px;
+                border: 1px solid #b3b38c;
+                text-decoration: none;
+                color: #2c2c2c;
+                transition: 0.2s;
+                font-size: 14px;
+            }
+            .sidebar-item.active {
+                background: #FF8C00;
+                color: white;
+                font-weight: bold;
+                border-color: #FF8C00;
+            }
+            .sidebar-item:hover {
+                background: #FFD58C;
+            }
+
+            /* Основная область */
+            .main-content {
+                flex: 1;
+                padding: 30px 40px;
+            }
+            h1 {
+                color: #FF8C00;
+                font-size: 32px;
+                margin-bottom: 12px;
+                border-left: 5px solid #FF8C00;
+                padding-left: 20px;
+            }
+            .desc {
+                font-size: 18px;
+                color: #4a4a2a;
+                margin-bottom: 30px;
+                border-bottom: 1px dashed #c0c09a;
+                padding-bottom: 12px;
+            }
+
+            /* Поиск */
+            .search-box {
+                margin-bottom: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .search-input {
+                width: 350px;
+                padding: 12px 20px;
+                border-radius: 25px;
+                border: none;
+                background-color: #D3D3D3;
+                outline: none;
+                font-size: 14px;
+            }
+            .btn-search {
+                padding: 12px 35px;
+                border-radius: 25px;
+                border: none;
+                background-color: #999;
+                color: #333;
+                cursor: pointer;
+                margin-left: 10px;
+                font-weight: bold;
+                transition: 0.2s;
+            }
+            .btn-search:hover {
+                background-color: #888;
+            }
+            .highlight {
+                background-color: #FFD700;
+                color: black;
+                border-radius: 2px;
+            }
+
+            /* Карточки и блоки как в intro */
+            .theory-card {
+                background: #fffdf0;
+                border-radius: 32px;
+                padding: 20px 28px;
+                margin-bottom: 32px;
+                box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+                border: 1px solid #f0e2c5;
+            }
+            .theory-card h2 {
+                font-size: 26px;
+                color: #b45f06;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                border-left: 4px solid #FF8C00;
+                padding-left: 16px;
+            }
+            .theory-card h3 {
+                font-size: 22px;
+                margin: 20px 0 12px 0;
+                color: #c55a11;
+            }
+            .code-block {
+                background: #2d2d24;
+                color: #f8f8f2;
+                padding: 14px 18px;
+                border-radius: 20px;
+                font-family: 'Courier New', monospace;
+                margin: 16px 0;
+                overflow-x: auto;
+                font-size: 14px;
+            }
+            .inline-code {
+                background: #e9e2cd;
+                padding: 3px 8px;
+                border-radius: 12px;
+                font-family: monospace;
+                font-weight: 600;
+                color: #a53f00;
+            }
+            .two-cols {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 28px;
+                margin: 20px 0;
+            }
+            .info-box {
+                background: #fef5e8;
+                border-radius: 24px;
+                padding: 18px;
+                flex: 1;
+                min-width: 220px;
+            }
+            .badge {
+                background: #FF8C00;
+                color: white;
+                border-radius: 30px;
+                padding: 3px 12px;
+                font-size: 13px;
+                display: inline-block;
+                margin-right: 8px;
+            }
+            .button-link {
+                display: inline-block;
+                background: #FF8C00;
+                color: white;
+                padding: 12px 28px;
+                border-radius: 40px;
+                text-decoration: none;
+                font-weight: bold;
+                margin: 15px 0 8px 0;
+                transition: 0.2s;
+            }
+            .button-link:hover {
+                background: #e07a00;
+                transform: scale(1.02);
+            }
+            .card-grid {
+                display: flex;
+                gap: 30px;
+                margin: 30px 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .card {
+                background: #fffdf0;
+                border-radius: 32px;
+                padding: 24px 20px;
+                width: 260px;
+                text-align: center;
+                border: 1px solid #f0e2c5;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            }
+            .card-img {
+                font-size: 48px;
+                margin-bottom: 15px;
+            }
+            .card h4 {
+                font-size: 24px;
+                color: #c55a11;
+                margin-bottom: 12px;
+            }
+            .card p {
+                font-size: 14px;
+                color: #5a4a2a;
+                line-height: 1.4;
+            }
+            .topic-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin: 20px 0;
+            }
+            .topic-badge {
+                background: #f5e7ce;
+                border-radius: 60px;
+                padding: 8px 20px;
+                text-decoration: none;
+                color: #8a581c;
+                font-weight: 500;
+                transition: 0.2s;
+                border: 1px solid #e1cfa4;
+                display: inline-block;
+            }
+            .topic-badge:hover {
+                background: #FF8C00;
+                color: white;
+            }
+            hr {
+                margin: 25px 0;
+                border: 0;
+                height: 1px;
+                background: linear-gradient(to right, #ffda9e, transparent);
+            }
+            footer {
+                text-align: center;
+                margin-top: 40px;
+                padding: 20px;
+                background: #ddd8b0;
+                border-radius: 48px;
+                font-size: 14px;
+                color: #4f4f2f;
+            }
+            @media (max-width: 800px) {
+                .wrapper {
+                    flex-direction: column;
+                }
+                .sidebar {
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                }
+                .sidebar-item {
+                    width: auto;
+                    margin: 0;
+                }
+                .main-content {
+                    padding: 20px;
+                }
+                .search-input {
+                    width: 250px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <div class="logo"> <a href="index.html" style="font-weight: bold;"> E-Book<span>Study</span></div></a>
+            
+        </header>
+
+        <div class="wrapper">
+            <!-- Боковое меню ТОЧНО КАК В INTRO.HTML -->
+            <aside class="sidebar">
+                <a href="intro.html" class="sidebar-item">Вводное занятие</a>
+                <a href="vscode.html" class="sidebar-item">Visual Studio Code</a>
+                <a href="practice.html" class="sidebar-item">Тренажер</a>
+                <a href="links.html" class="sidebar-item">Ссылки и изображения</a>
+                <a href="tables.html" class="sidebar-item">Таблицы</a>
+                <a href="validator.html" class="sidebar-item">Валидность кода</a>
+                <a href="css.html" class="sidebar-item">Основы CSS</a>
+                <a href="text.html" class="sidebar-item">Текст</a>
+                <a href="margins.html" class="sidebar-item">Отступы</a>
+                <a href="forms.html" class="sidebar-item">Формы</a>
+                <a href="website.html" class="sidebar-item">Мой первый сайт</a>
+                <a href="github.html" class="sidebar-item">GitHub</a>
+                <a href="melodia.html" class="sidebar-item">Верстка ЖК Мелодия</a>
+            </aside>
+
+            <main class="main-content">
+                <h1>📚 Добро пожаловать в учебник HTML и CSS</h1>
+                <p class="desc">Интерактивный самоучитель для будущих веб-разработчиков. Выберите тему в боковом меню или начните с карточек ниже.</p>
+
+                <!-- ПОИСК (как в intro.html) -->
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Поиск по странице...">
+                    <button class="btn-search" id="searchBtn">Найти</button>
+                </div>
+
+                <!-- Герой-статистика -->
+                <div class="theory-card">
+                    <h2>📊 Наш учебник в цифрах</h2>
+                    <div class="two-cols">
+                        <div class="info-box"><span class="badge">📖</span> <strong>14+ разделов</strong><br>От основ до продвинутых тем</div>
+                        <div class="info-box"><span class="badge">💻</span> <strong>Практика в CodePen</strong><br>Интерактивные примеры кода</div>
+                        <div class="info-box"><span class="badge">🎯</span> <strong>От новичка до профи</strong><br>Пошаговое обучение</div>
+                    </div>
+                </div>
+
+                <!-- Карточки-категории -->
+                <div class="theory-card">
+                    <h2>🎯 Основные направления</h2>
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-img">📘</div>
+                            <h4>HTML</h4>
+                            <p>Изучите основы разметки, теги, атрибуты и структуру документа. Создайте каркас любой веб-страницы.</p>
+                            <a href="intro.html" class="button-link" style="padding: 8px 20px; font-size: 14px;">К первому уроку →</a>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">🎨</div>
+                            <h4>CSS</h4>
+                            <p>Оформляйте сайты с помощью стилей: цвета, шрифты, отступы, flexbox и grid. Превратите разметку в красивый дизайн.</p>
+                            <a href="css.html" class="button-link" style="padding: 8px 20px; font-size: 14px;">Изучить CSS →</a>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">🔧</div>
+                            <h4>Инструменты</h4>
+                            <p>VS Code, Git, GitHub, эмуляция Live Server – всё для профессиональной разработки и командной работы.</p>
+                            <a href="vscode.html" class="button-link" style="padding: 8px 20px; font-size: 14px;">Изучить инструменты →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Популярные темы -->
+                <div class="theory-card">
+                    <h2>⭐ Быстрый доступ к популярным темам</h2>
+                    <div class="topic-links">
+                        <a href="intro.html" class="topic-badge">🏠 Введение в веб</a>
+                        <a href="links.html" class="topic-badge">🔗 Ссылки и изображения</a>
+                        <a href="tables.html" class="topic-badge">📊 Таблицы</a>
+                        <a href="forms.html" class="topic-badge">📝 Формы</a>
+                        <a href="text.html" class="topic-badge">✍️ Оформление текста</a>
+                        <a href="margins.html" class="topic-badge">📐 Отступы и Box Model</a>
+                        <a href="website.html" class="topic-badge">🌐 Мой первый сайт</a>
+                        <a href="github.html" class="topic-badge">🐙 GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Чему вы научитесь -->
+                <div class="theory-card">
+                    <h2>✅ Что вас ждёт</h2>
+                    <div class="two-cols">
+                        <div class="info-box">
+                            <span class="badge">📖</span> Понятная теория с примерами кода<br><br>
+                            <span class="badge">🎯</span> Интерактивные тренажёры (HTML Academy)
+                        </div>
+                        <div class="info-box">
+                            <span class="badge">🛠️</span> Практические задания на реальных макетах<br><br>
+                            <span class="badge">💡</span> Советы по код-стайлу и лучшим практикам
+                        </div>
+                        <div class="info-box">
+                            <span class="badge">🏆</span> Итоговые проекты: вёрстка «ЖК Мелодия», портфолио, GitHub Pages
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Тренажёры -->
+                <div class="theory-card">
+                    <h2>🎮 Отработайте навыки в онлайн‑тренажёре</h2>
+                    <p>Пройдите интерактивные курсы HTML Academy и закрепите теорию на практике.</p>
+                    <a href="practice.html" class="button-link">Перейти к тренажёрам →</a>
+                    <p style="margin-top: 15px; font-size: 14px;">* Рекомендуем начать с главы «Основы HTML и CSS»</p>
+                </div>
+
+                <!-- Ресурсы -->
+                <div class="theory-card">
+                    <h2>📚 Полезные ресурсы</h2>
+                    <div class="topic-links">
+                        <a href="https://html5book.ru/" target="_blank" class="topic-badge">📘 html5book.ru — справочник</a>
+                        <a href="https://validator.w3.org/" target="_blank" class="topic-badge">⚡ W3C Validator — проверка кода</a>
+                        <a href="#" class="topic-badge">💬 Чат поддержки — вопросы по вёрстке</a>
+                    </div>
+                </div>
+
+                <!-- Цитата -->
+                <div class="theory-card">
+                    <h2>🌟 Вдохновение</h2>
+                    <p style="font-size: 18px; font-style: italic; text-align: center;">«Знание HTML и CSS открывает двери в мир веб-творчества. Каждая страница начинается с первой строчки кода. Начните свой путь прямо сейчас!»</p>
+                    <p style="text-align: center; margin-top: 15px; font-weight: bold;">— E-BookStudy Team</p>
+                </div>
+
+                <footer>
+                    📚 E-BookStudy — твой гид в мире веб-разработки. Выбери тему слева или используй карточки для быстрого старта.<br>
+                    ⚡ Актуально на 2026 год. Все уроки содержат практические задания и примеры кода.
+                </footer>
+            </main>
+        </div>
+
+        <script>
+            // Функция поиска и подсветки (как в intro.html)
+            function performSearch(inputElement, container) {
+                if (!inputElement || !container) return;
+                const query = inputElement.value.trim();
+                removeHighlights();
+                if (query === "") return;
+
+                const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+                let node;
+                const nodesToReplace = [];
+
+                while (node = walker.nextNode()) {
+                    if (node.parentNode.tagName === 'SCRIPT' ||
+                        node.parentNode.tagName === 'STYLE' ||
+                        node.parentNode.tagName === 'INPUT' ||
+                        node.parentNode.tagName === 'TEXTAREA') continue;
+
+                    if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
+                        nodesToReplace.push(node);
+                    }
+                }
+
+                nodesToReplace.forEach(node => {
+                    const span = document.createElement('span');
+                    span.innerHTML = node.textContent.replace(regex, '<mark class="highlight">$1</mark>');
+                    node.parentNode.replaceChild(span, node);
+                });
+
+                const firstResult = container.querySelector('.highlight');
+                if (firstResult) {
+                    firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    alert("Ничего не найдено");
+                }
+            }
+
+            function removeHighlights() {
+                document.querySelectorAll('.highlight').forEach(h => {
+                    const parent = h.parentNode;
+                    const text = parent.textContent;
+                    const textNode = document.createTextNode(text);
+                    parent.replaceWith(textNode);
+                });
+            }
+
+            // Обработчики для поиска
+            document.addEventListener('DOMContentLoaded', () => {
+                const main = document.querySelector('.main-content');
+                if (!main) return;
+
+                const searchInput = document.getElementById('searchInput');
+                const searchBtn = document.getElementById('searchBtn');
+
+                if (searchBtn) {
+                    searchBtn.addEventListener('click', () => {
+                        performSearch(searchInput, main);
+                    });
+                }
+
+                if (searchInput) {
+                    searchInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            performSearch(searchInput, main);
+                        }
+                    });
+                }
+            });
+
+        
+        </script>
+
+        <style>
+            /* Тёмная тема */
+            body.dark-theme .sidebar-item {
+                background-color: #4b451f;
+                color: #f5e6c4;
+                border-color: #7e6b38;
+            }
+            body.dark-theme aside {
+                background-color: #3e3a1c;
+            }
+            body.dark-theme .sidebar-item.active {
+                background-color: #FF8C00;
+                color: #1f1b08;
+            }
+            body.dark-theme .theory-card,
+            body.dark-theme .card,
+            body.dark-theme .info-box {
+                background: #494222;
+                border-color: #b68b40;
+                color: #fef0cf;
+            }
+            body.dark-theme .button-link {
+                background-color: #f3972e;
+            }
+            body.dark-theme .topic-badge {
+                background: #6f5d30;
+                color: #ffe1a0;
+            }
+            body.dark-theme .topic-badge:hover {
+                background: #FF8C00;
+                color: #1f1b08;
+            }
+            body.dark-theme footer {
+                background-color: #4f4824;
+            }
+            body.dark-theme .code-block {
+                background: #1e1e1a;
+            }
+            body.dark-theme .inline-code {
+                background: #5f562e;
+                color: #ffd89a;
+            }
+            body.dark-theme .desc {
+                color: #ddd0a0;
+                border-bottom-color: #7e6b38;
+            }
+            body.dark-theme h1, 
+            body.dark-theme .theory-card h2,
+            body.dark-theme .theory-card h3 {
+                color: #ffb347;
+            }
+            body.dark-theme .wrapper {
+                background-color: #2d2a1a;
+            }
+            body.dark-theme .search-input {
+                background-color: #4a4422;
+                color: #f0edd0;
+            }
+            body.dark-theme .btn-search {
+                background-color: #6a6032;
+                color: #f0edd0;
+            }
+        </style>
+    </body>
+    </html>

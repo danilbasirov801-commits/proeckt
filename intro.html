@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вводное занятие | E-BookStudy</title>
+    <style>
+        /* Единый стиль проекта (как на всех страницах) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #FFFBD6;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+
+        /* Шапка */
+        .header {
+            background-color: #D3D3D3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            border-bottom: 1px solid #aaa;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #FF8C00;
+        }
+        .nav a {
+            margin: 0 12px;
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav a:hover {
+            color: #FF8C00;
+        }
+        .theme-icon {
+            font-size: 24px;
+            cursor: default;
+        }
+
+        /* Боковое меню */
+        .wrapper {
+            display: flex;
+            max-width: auto;
+            margin: 0 auto;
+            background: #FFFBD6;
+        }
+        .sidebar {
+            width: 260px;
+            background-color: #e9e9cf;
+            border-right: 1px solid #ccc;
+            padding: 20px 10px;
+        }
+        .sidebar-item {
+            display: block;
+            background: #ecece0;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 20px;
+            border: 1px solid #b3b38c;
+            text-decoration: none;
+            color: #2c2c2c;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .sidebar-item.active {
+            background: #FF8C00;
+            color: white;
+            font-weight: bold;
+            border-color: #FF8C00;
+        }
+        .sidebar-item:hover {
+            background: #FFD58C;
+        }
+
+        /* Основная область */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px;
+        }
+        h1 {
+            color: #FF8C00;
+            font-size: 32px;
+            margin-bottom: 12px;
+            border-left: 5px solid #FF8C00;
+            padding-left: 20px;
+        }
+        .desc {
+            font-size: 18px;
+            color: #4a4a2a;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #c0c09a;
+            padding-bottom: 12px;
+        }
+
+        /* Стили для поисковой строки */
+        .search-box {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-input {
+            width: 350px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background-color: #D3D3D3;
+            outline: none;
+            font-size: 14px;
+        }
+        .btn-search {
+            padding: 12px 35px;
+            border-radius: 25px;
+            border: none;
+            background-color: #999;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn-search:hover {
+            background-color: #888;
+        }
+        .highlight {
+            background-color: #FFD700;
+            color: black;
+            border-radius: 2px;
+        }
+
+        /* блоки с теорией */
+        .theory-card {
+            background: #fffdf0;
+            border-radius: 32px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            border: 1px solid #f0e2c5;
+        }
+        .theory-card h2 {
+            font-size: 26px;
+            color: #b45f06;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #FF8C00;
+            padding-left: 16px;
+        }
+        .theory-card h3 {
+            font-size: 22px;
+            margin: 20px 0 12px 0;
+            color: #c55a11;
+        }
+        .code-block {
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .inline-code {
+            background: #e9e2cd;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #a53f00;
+        }
+        .two-cols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 20px 0;
+        }
+        .info-box {
+            background: #fef5e8;
+            border-radius: 24px;
+            padding: 18px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .badge {
+            background: #FF8C00;
+            color: white;
+            border-radius: 30px;
+            padding: 3px 12px;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .practice-box {
+            background: #fff0cf;
+            border-radius: 28px;
+            padding: 24px;
+            margin: 35px 0;
+            border-left: 8px solid #FF8C00;
+        }
+        .button-link {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            transition: 0.2s;
+        }
+        .button-link:hover {
+            background: #e07a00;
+            transform: scale(1.02);
+        }
+        hr {
+            margin: 25px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ffda9e, transparent);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #ddd8b0;
+            border-radius: 48px;
+            font-size: 14px;
+            color: #4f4f2f;
+        }
+        @media (max-width: 800px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .sidebar-item {
+                width: auto;
+                margin: 0;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .search-input {
+                width: 250px;
+            }
+        }
+        .tag-list {
+            background: #f3edd9;
+            border-radius: 20px;
+            padding: 12px 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"> <a href="index.html"> E-Book<span>Study</span></a></div>
+        <div class="theme-icon"></div>
+    </header>
+
+    <div class="wrapper">
+        <!-- Боковое меню с активным пунктом 1_Вводное занятие -->
+        <aside class="sidebar">
+            <a href="intro.html" class="sidebar-item active">Вводное занятие</a>
+            <a href="vscode.html" class="sidebar-item">Visual Studio Code</a>
+            <a href="practice.html" class="sidebar-item">Тренажер</a>
+            <a href="links.html" class="sidebar-item">Ссылки и изображения</a>
+            <a href="tables.html" class="sidebar-item">Таблицы</a>
+            <a href="validator.html" class="sidebar-item">Валидность кода</a>
+            <a href="css.html" class="sidebar-item">Основы CSS</a>
+            <a href="text.html" class="sidebar-item">Текст</a>
+            <a href="margins.html" class="sidebar-item">Отступы</a>
+            <a href="forms.html" class="sidebar-item">Формы</a>
+            <a href="website.html" class="sidebar-item">Мой первый сайт</a>
+            <a href="github.html" class="sidebar-item">GitHub</a>
+            <a href="melodia.html" class="sidebar-item">Верстка ЖК Мелодия</a>
+        </aside>
+
+        <main class="main-content">
+            <h1>📖 Вводное занятие: основы веб-разработки</h1>
+            <p class="desc">Лектор: Хаятова Лилия Рэхтямовна, преподаватель кафедры математики и информатики ЧОУВО «Международный Институт Дизайна и Сервиса»</p>
+
+            <!-- ПОИСКОВАЯ СТРОКА -->
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Поиск по странице...">
+                <button class="btn-search" id="searchBtn">Найти</button>
+            </div>
+
+            <!-- 1. Языки веб-разработки -->
+            <div class="theory-card">
+                <h2>🌐 1. Языки для создания сайтов</h2>
+                <p>Чтобы создать современный сайт, веб-разработчик использует несколько языков. У каждого из них своя задача.</p>
+                <div class="two-cols">
+                    <div class="info-box"><span class="badge">📄 HTML & CSS</span> <strong>Вёрстка</strong> — размещение элементов сайта по нужным местам. HTML создаёт каркас, CSS отвечает за оформление.</div>
+                    <div class="info-box"><span class="badge">⚙️ PHP</span> <strong>Программирование</strong> (серверная логика). Пример: регистрация пользователей, обработка форм.</div>
+                    <div class="info-box"><span class="badge">✨ JavaScript</span> <strong>Оживление</strong> сайта: слайдеры, интерактивные карты, анимации.</div>
+                </div>
+                <div class="code-block">
+                    &lt;!-- HTML строит каркас, CSS красит, JS добавляет интерактивность --&gt;
+                </div>
+            </div>
+
+            <!-- 2. Язык HTML и структура документа -->
+            <div class="theory-card">
+                <h2>🏗️ 2. Язык HTML — основа веб-страниц</h2>
+                <p><strong>HTML</strong> (HyperText Markup Language) задаёт структуру документа: заголовки, абзацы, списки, изображения. Это скелет любой страницы.</p>
+                <h3>🧱 Структура HTML-документа</h3>
+                <div class="code-block">
+                    &lt;!DOCTYPE html&gt;<br>
+                    &lt;html&gt;<br>
+                    &nbsp;&nbsp;&lt;head&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="utf-8"&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Заголовок страницы (вкладка браузера)&lt;/title&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- ссылки на CSS, мета-теги, иконки --&gt;<br>
+                    &nbsp;&nbsp;&lt;/head&gt;<br>
+                    &nbsp;&nbsp;&lt;body&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Основное содержимое: текст, картинки, ссылки...<br>
+                    &nbsp;&nbsp;&lt;/body&gt;<br>
+                    &lt;/html&gt;
+                </div>
+                <div class="two-cols">
+                    <div class="info-box"><span class="badge">&lt;head&gt;</span> Содержит метаданные: <span class="inline-code">&lt;title&gt;</span>, кодировку, ссылки на CSS, информацию для SEO.</div>
+                    <div class="info-box"><span class="badge">&lt;body&gt;</span> Всё, что видит пользователь: текст, изображения, кнопки. Обязательный элемент, используется один раз.</div>
+                </div>
+                <p><span class="badge">📌 Важно</span> Большинство тегов парные: <span class="inline-code">&lt;p&gt;...&lt;/p&gt;</span>. Закрывающий тег содержит слеш <span class="inline-code">/</span>. Есть и непарные (одиночные): <span class="inline-code">&lt;img&gt;</span>, <span class="inline-code">&lt;hr&gt;</span>, <span class="inline-code">&lt;br&gt;</span>.</p>
+            </div>
+
+            <!-- 3. Текстовые элементы: абзацы, заголовки, strong, em -->
+            <div class="theory-card">
+                <h2>📝 3. Форматирование текста</h2>
+                <div class="two-cols">
+                    <div class="info-box">
+                        <span class="badge">H1–H6</span> Заголовки: от самого важного (h1) до подзаголовков (h6).<br>
+                        <span class="badge">&lt;p&gt;</span> Абзац текста.
+                    </div>
+                    <div class="info-box">
+                        <span class="badge">&lt;strong&gt;</span> Логическое выделение <strong>важности</strong> (жирный).<br>
+                        <span class="badge">&lt;em&gt;</span> Логическое <em>акцентирование</em> (курсив).<br>
+                        <span class="badge">&lt;b&gt; / &lt;i&gt;</span> Физическое жирное/курсивное начертание без смысловой нагрузки.
+                    </div>
+                </div>
+                <div class="code-block">
+                    &lt;h1&gt;Главный заголовок&lt;/h1&gt;<br>
+                    &lt;p&gt;Это обычный абзац с &lt;strong&gt;важной фразой&lt;/strong&gt; и &lt;em&gt;акцентом&lt;/em&gt;.&lt;/p&gt;<br>
+                    &lt;p&gt;Текст может быть &lt;b&gt;жирным&lt;/b&gt; или &lt;i&gt;курсивом&lt;/i&gt; без дополнительной семантики.&lt;/p&gt;
+                </div>
+                <h3>📋 Списки: упорядоченные и неупорядоченные</h3>
+                <div class="two-cols">
+                    <div class="info-box">
+                        <span class="badge">ul</span> Неупорядоченный (маркированный) список:
+                        <div class="tag-list" style="margin-top:8px;">
+                            &lt;ul&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;Пункт 1&lt;/li&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;Пункт 2&lt;/li&gt;<br>
+                            &lt;/ul&gt;
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <span class="badge">ol</span> Упорядоченный (нумерованный) список:
+                        <div class="tag-list" style="margin-top:8px;">
+                            &lt;ol&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;Первый шаг&lt;/li&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;Второй шаг&lt;/li&gt;<br>
+                            &lt;/ol&gt;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Комментарии в HTML -->
+            <div class="theory-card">
+                <h2>💬 4. Комментарии в HTML</h2>
+                <p>Комментарии не отображаются на странице, но видны в исходном коде. Используются для пояснений или временного отключения кода.</p>
+                <div class="code-block">
+                    &lt;!-- Это комментарий. Браузер его проигнорирует --&gt;<br>
+                    &lt;p&gt;Видимый текст&lt;/p&gt;<br>
+                    &lt;!-- &lt;p&gt;Закомментированный абзац&lt;/p&gt;  --&gt;
+                </div>
+                <p><span class="badge">💡 Зачем?</span> Оставлять заметки себе или коллегам, отлаживать код, временно скрывать блоки.</p>
+            </div>
+
+            <!-- 5. Ссылки и изображения -->
+            <div class="theory-card">
+                <h2>🔗 5. Ссылки и изображения</h2>
+                <h3>Гиперссылки (тег &lt;a&gt;)</h3>
+                <div class="code-block">
+                    &lt;a href="https://html5book.ru"&gt;Справочник по HTML&lt;/a&gt;<br>
+                    &lt;a href="page2.html"&gt;Перейти на другую страницу сайта&lt;/a&gt;
+                </div>
+                <h3>🖼️ Изображения (тег &lt;img&gt;)</h3>
+                <div class="code-block">
+                    &lt;img src="https://code.mu/smile.png" alt="Улыбающийся смайлик"&gt;<br>
+                    &lt;img src="images/logo.jpg" width="200" height="100" alt="Логотип"&gt;
+                </div>
+                <p><span class="badge">Важно</span> Атрибут <span class="inline-code">alt</span> обязателен: описывает картинку (для SEO и скринридеров).</p>
+                <h3>📸 Ссылки в виде картинок</h3>
+                <div class="code-block">
+                    &lt;a href="https://phphtml.net" target="_blank"&gt;<br>
+                    &nbsp;&nbsp;&lt;img src="https://code.mu/smile.png" alt="Ссылка-картинка"&gt;<br>
+                    &lt;/a&gt;
+                </div>
+                <p>Такая конструкция превращает картинку в кликабельный элемент.</p>
+            </div>
+
+            <!-- 6. Инструменты + онлайн-редактор CodePen -->
+            <div class="theory-card">
+                <h2>🛠️ 6. Инструменты для создания HTML-кода</h2>
+                <p>Для начала можно использовать онлайн-редакторы, например <strong>CodePen</strong>. Это простая среда, где сразу виден результат вёрстки.</p>
+                <div class="info-box" style="background:#feeed8;">
+                    <span class="badge">✏️ CodePen</span> Откройте редактор: <a href="https://codepen.io/pen/" target="_blank" style="color:#b45f06;">https://codepen.io/pen/</a><br>
+                    В окне HTML пишете код, справа — предпросмотр в реальном времени. Идеально для экспериментов.
+                </div>
+                <div class="code-block">
+                    &lt;!-- Пример кода для CodePen --&gt;<br>
+                    &lt;h2&gt;Привет, мир!&lt;/h2&gt;<br>
+                    &lt;p&gt;Это моя первая веб-страница.&lt;/p&gt;<br>
+                    &lt;img src="https://via.placeholder.com/150" alt="пример"&gt;
+                </div>
+                <p>Также можно использовать обычный блокнот или любой редактор кода (VS Code). Главное — сохранять файлы с расширением <span class="inline-code">.html</span> и открывать в браузере.</p>
+            </div>
+
+            <!-- 7. Структура простейшей страницы и специальные символы -->
+            <div class="theory-card">
+                <h2>📄 7. Базовая страница и спецсимволы (CER)</h2>
+                <div class="code-block">
+                    &lt;!DOCTYPE html&gt;<br>
+                    &lt;html&gt;<br>
+                    &nbsp;&nbsp;&lt;head&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="utf-8"&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Это заголовок тайтл&lt;/title&gt;<br>
+                    &nbsp;&nbsp;&lt;/head&gt;<br>
+                    &nbsp;&nbsp;&lt;body&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Это основное содержимое страницы.<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Символы: &amp;lt; — &lt;, &amp;copy; — ©&lt;/p&gt;<br>
+                    &nbsp;&nbsp;&lt;/body&gt;<br>
+                    &lt;/html&gt;
+                </div>
+                <p><span class="badge">🔣 Специальные символы</span> (Character Entity Reference): <span class="inline-code">&amp;lt;</span> → <strong>&lt;</strong>, <span class="inline-code">&amp;copy;</span> → ©, <span class="inline-code">&amp;nbsp;</span> — неразрывный пробел.</p>
+                <p>Дополнительные справочные материалы: <a href="https://html5book.ru/html-html5/" target="_blank" style="color:#c55a11;">html5book.ru/html-html5/</a></p>
+            </div>
+
+            <!-- 8. Практическое задание (как в презентации) -->
+            <div class="practice-box">
+                <h3 style="color:#a55302;">📌 Практическое задание</h3>
+                <p><strong>1. Откройте онлайн-редактор CodePen:</strong> <a href="https://codepen.io/pen/" target="_blank" style="color:#e07a00;">https://codepen.io/pen/</a></p>
+                <p><strong>2. Воспроизведите базовую структуру HTML-документа:</strong></p>
+                <div class="code-block" style="background:#2c2c24;">
+                    &lt;!DOCTYPE html&gt;<br>
+                    &lt;html&gt;<br>
+                    &lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;title&gt;Моя первая страница&lt;/title&gt;&lt;/head&gt;<br>
+                    &lt;body&gt;<br>
+                    &nbsp;&nbsp;&lt;h1&gt;Добро пожаловать!&lt;/h1&gt;<br>
+                    &nbsp;&nbsp;&lt;p&gt;Это мой первый абзац.&lt;/p&gt;<br>
+                    &nbsp;&nbsp;&lt;!-- добавим список --&gt;<br>
+                    &nbsp;&nbsp;&lt;ul&gt;&lt;li&gt;HTML&lt;/li&gt;&lt;li&gt;CSS&lt;/li&gt;&lt;li&gt;JavaScript&lt;/li&gt;&lt;/ul&gt;<br>
+                    &nbsp;&nbsp;&lt;img src="https://code.mu/smile.png" alt="смайлик"&gt;<br>
+                    &lt;/body&gt;<br>
+                    &lt;/html&gt;
+                </div>
+                <p><strong>3. Добавьте на страницу:</strong> заголовки h2, h3, абзац с <span class="inline-code">&lt;strong&gt;</span> и <span class="inline-code">&lt;em&gt;</span>, упорядоченный список (ol), ссылку на любой сайт и картинку-ссылку.</p>
+                <p><strong>4. Поэкспериментируйте с комментариями:</strong> закомментируйте часть кода и посмотрите, как меняется отображение.</p>
+                <a href="https://codepen.io/pen/" target="_blank" class="button-link">🎯 Открыть CodePen и начать</a>
+                <hr>
+                <p><span class="badge" style="background: #b4682d;">✅ Результат работы сохраните в виде .html файла или поделитесь ссылкой на CodePen.</span> Это поможет закрепить основы HTML перед следующими занятиями.</p>
+            </div>
+
+            <!-- Дополнительные ресурсы -->
+            <div class="theory-card">
+                <h2>📚 Дополнительные материалы</h2>
+                <ul style="margin-left: 25px;">
+                    <li>Справочник по HTML: <a href="https://html5book.ru/" target="_blank">html5book.ru</a></li>
+                    <li>Онлайн-тренажёр HTML Academy: <a href="https://htmlacademy.ru/" target="_blank">htmlacademy.ru</a></li>
+                    <li>Валидатор кода (проверка ошибок): <a href="https://validator.w3.org/" target="_blank">validator.w3.org</a></li>
+                </ul>
+                <p style="margin-top: 16px;">По всем вопросам — обращайтесь к лектору: Хаятова Лилия Рэхтямовна. Успешного старта в веб-разработке!</p>
+            </div>
+
+            <footer>
+                📘 E-BookStudy · Вводное занятие. Освойте HTML шаг за шагом.
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Функция поиска и подсветки
+        function performSearch(inputElement, container) {
+            if (!inputElement || !container) return;
+            const query = inputElement.value.trim();
+            removeHighlights();
+            if (query === "") return;
+
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const nodesToReplace = [];
+
+            while (node = walker.nextNode()) {
+                if (node.parentNode.tagName === 'SCRIPT' ||
+                    node.parentNode.tagName === 'STYLE' ||
+                    node.parentNode.tagName === 'INPUT' ||
+                    node.parentNode.tagName === 'TEXTAREA') continue;
+
+                if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            nodesToReplace.forEach(node => {
+                const span = document.createElement('span');
+                span.innerHTML = node.textContent.replace(regex, '<mark class="highlight">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+
+            const firstResult = container.querySelector('.highlight');
+            if (firstResult) {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert("Ничего не найдено");
+            }
+        }
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(h => {
+                const parent = h.parentNode;
+                const text = parent.textContent;
+                const textNode = document.createTextNode(text);
+                parent.replaceWith(textNode);
+            });
+        }
+
+        // Обработчики для поисковой строки
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('.main-content');
+            if (!main) return;
+
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+
+            if (searchBtn) {
+                searchBtn.addEventListener('click', () => {
+                    performSearch(searchInput, main);
+                });
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        performSearch(searchInput, main);
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

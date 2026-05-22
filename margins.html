@@ -1,0 +1,706 @@
+    <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отступы | E-BookStudy</title>
+    <style>
+        /* Базовые стили — полное соответствие сайту */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #FFFBD6;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+
+        /* Шапка сайта */
+        .header {
+            background-color: #D3D3D3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            border-bottom: 1px solid #aaa;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #FF8C00;
+        }
+        .nav a {
+            margin: 0 12px;
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav a:hover {
+            color: #FF8C00;
+        }
+        .theme-icon {
+            font-size: 24px;
+            cursor: default;
+        }
+
+        /* Контейнер + боковое меню */
+        .wrapper {
+            display: flex;
+            max-width: auto;
+            margin: 0 auto;
+            background: #FFFBD6;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #e9e9cf;
+            border-right: 1px solid #ccc;
+            padding: 20px 10px;
+        }
+        .sidebar-item {
+            display: block;
+            background: #ecece0;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 20px;
+            border: 1px solid #b3b38c;
+            text-decoration: none;
+            color: #2c2c2c;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .sidebar-item.active {
+            background: #FF8C00;
+            color: white;
+            font-weight: bold;
+            border-color: #FF8C00;
+        }
+        .sidebar-item:hover {
+            background: #FFD58C;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px;
+        }
+
+        h1 {
+            color: #FF8C00;
+            font-size: 32px;
+            margin-bottom: 12px;
+            border-left: 5px solid #FF8C00;
+            padding-left: 20px;
+        }
+        .desc {
+            font-size: 18px;
+            color: #4a4a2a;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #c0c09a;
+            padding-bottom: 12px;
+        }
+
+        /* стили для блоков с теорией */
+        .theory-block {
+            background: #fffdf0;
+            border-radius: 32px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #f0e2c5;
+        }
+        .theory-block h2 {
+            font-size: 26px;
+            color: #b45f06;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #FF8C00;
+            padding-left: 16px;
+        }
+        .theory-block h3 {
+            font-size: 22px;
+            margin: 20px 0 12px 0;
+            color: #c55a11;
+        }
+        .code-example {
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .inline-code {
+            background: #e9e2cd;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #a53f00;
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 20px 0;
+        }
+        .info-card {
+            background: #fef5e8;
+            border-radius: 24px;
+            padding: 18px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .badge {
+            background: #FF8C00;
+            color: white;
+            border-radius: 30px;
+            padding: 3px 12px;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .demo-box {
+            background: #e8e0c0;
+            border: 2px solid #b3a56b;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .margin-demo {
+            background: #c8e6c9;
+            border: 2px solid #2e7d32;
+            margin: 30px;
+            padding: 15px;
+            text-align: center;
+        }
+        .padding-demo {
+            background: #ffe0b2;
+            border: 2px solid #e65100;
+            padding: 30px;
+            text-align: center;
+        }
+        .box-model-visual {
+            background: #fff9e8;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .margin-layer {
+            background: #ffcd94;
+            padding: 25px;
+            margin: 0;
+        }
+        .border-layer {
+            background: #a5d6a5;
+            padding: 15px;
+        }
+        .padding-layer {
+            background: #90caf9;
+            padding: 15px;
+        }
+        .content-layer {
+            background: #ffab91;
+            padding: 20px;
+        }
+        .task-block {
+            background: #fff0cf;
+            border-radius: 28px;
+            padding: 24px;
+            margin: 35px 0;
+            border-left: 8px solid #FF8C00;
+        }
+        .button-link {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            transition: 0.2s;
+        }
+        .button-link:hover {
+            background: #e07a00;
+            transform: scale(1.02);
+        }
+        hr {
+            margin: 25px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ffda9e, transparent);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #ddd8b0;
+            border-radius: 48px;
+            font-size: 14px;
+            color: #4f4f2f;
+        }
+        @media (max-width: 800px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .sidebar-item {
+                width: auto;
+                margin: 0;
+            }
+            .main-content {
+                padding: 20px;
+            }
+        }
+        .search-box {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-input {
+            width: 350px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background-color: #D3D3D3;
+            outline: none;
+            font-size: 14px;
+        }
+        .btn-search {
+            padding: 12px 35px;
+            border-radius: 25px;
+            border: none;
+            background-color: #999;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .btn-search:hover {
+            background-color: #888;
+        }
+        .highlight {
+            background-color: #FFD700;
+            color: black;
+            border-radius: 2px;
+        }
+        .list-style-demo {
+            background: #fff5e6;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .list-style-demo ul, 
+        .list-style-demo ol {
+            padding-left: 30px;
+            margin: 10px 0;
+        }
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"> <a href="index.html"> E-Book<span>Study</span></a></div>
+        </div>
+        <div class="theme-icon"></div>
+    </header>
+
+    <div class="wrapper">
+        <!-- Боковое меню — как в предыдущих работах -->
+        <aside class="sidebar">
+            <a href="intro.html" class="sidebar-item">Вводное занятие</a>
+            <a href="vscode.html" class="sidebar-item">Visual Studio Code</a>
+            <a href="practice.html" class="sidebar-item">Тренажер</a>
+            <a href="links.html" class="sidebar-item">Ссылки и изображения</a>
+            <a href="tables.html" class="sidebar-item">Таблицы</a>
+            <a href="validator.html" class="sidebar-item">Валидность кода</a>
+            <a href="css.html" class="sidebar-item">Основы CSS</a>
+            <a href="text.html" class="sidebar-item">Текст</a>
+            <a href="margins.html" class="sidebar-item active">Отступы</a>
+            <a href="forms.html" class="sidebar-item">Формы</a>
+            <a href="website.html" class="sidebar-item">Мой первый сайт</a>
+            <a href="github.html" class="sidebar-item">GitHub</a>
+            <a href="melodia.html" class="sidebar-item">Верстка ЖК Мелодия</a>
+        </aside>
+
+        <main class="main-content">
+            <h1>📏 Отступы в CSS</h1>
+            <p class="desc">Модель блока: margin (внешние отступы) и padding (внутренние). Работа с маркерами списков. Лектор: Хаятова Лилия Рэхтямовна</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Поиск">
+                <button class="btn-search">Найти</button>
+            </div>
+
+            <!-- 1. Box Model -->
+            <div class="theory-block">
+                <h2>📦 1. Box Model (блочная модель)</h2>
+                <p>Каждый HTML-элемент представляет собой прямоугольник, который состоит из четырёх слоёв:</p>
+                <div class="box-model-visual">
+                    <div class="margin-layer" style="background: #ffcd94;">
+                        <strong>Margin (внешний отступ)</strong> — прозрачная область вокруг границы
+                        <div class="border-layer" style="background: #a5d6a5;">
+                            <strong>Border (граница)</strong>
+                            <div class="padding-layer" style="background: #90caf9;">
+                                <strong>Padding (внутренний отступ)</strong>
+                                <div class="content-layer" style="background: #ffab91;">
+                                    <strong>Content (содержимое)</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-example">
+                    /* Блочная модель элемента */<br>
+                    .element {<br>
+                    &nbsp;&nbsp;margin: 20px;    /* внешние отступы */<br>
+                    &nbsp;&nbsp;border: 2px solid black; /* граница */<br>
+                    &nbsp;&nbsp;padding: 15px;   /* внутренние отступы */<br>
+                    &nbsp;&nbsp;width: 300px;<br>
+                    }
+                </div>
+                <div class="info-card">
+                    <span class="badge">💡 Свойство box-sizing</span>
+                    <p><span class="inline-code">box-sizing: border-box;</span> — ширина включает padding и border, что упрощает расчёты.</p>
+                    <div class="code-example">
+                        * { box-sizing: border-box; } /* рекомендуется для всех элементов */
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Margin (внешние отступы) -->
+            <div class="theory-block">
+                <h2>⬅️➡️ 2. Margin — внешние отступы</h2>
+                <p>Отступы между элементами. Задаются для каждой стороны отдельно или сокращённо.</p>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📐 Способы задания</span>
+                        <div class="code-example">
+                            /* Раздельно по сторонам */<br>
+                            margin-top: 10px;<br>
+                            margin-right: 20px;<br>
+                            margin-bottom: 10px;<br>
+                            margin-left: 20px;<br><br>
+                            /* Сокращённая запись */<br>
+                            margin: 10px 20px;   /* верх/низ, право/лево */<br>
+                            margin: 10px 20px 15px 25px; /* верх, право, низ, лево */<br>
+                            margin: 10px;        /* все стороны одинаково */
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🎨 Визуальный пример</span>
+                        <div class="margin-demo" style="margin: 30px; background: #c8e6c9; border: 2px solid #2e7d32;">
+                            Блок с margin: 30px (отступ от соседних элементов)
+                        </div>
+                        <p style="font-size: 13px; color: #666;">Между этим блоком и другими элементами будет расстояние 30px.</p>
+                    </div>
+                </div>
+                <div class="code-example">
+                    /* Центрирование блока по горизонтали */<br>
+                    .center-block {<br>
+                    &nbsp;&nbsp;width: 200px;<br>
+                    &nbsp;&nbsp;margin: 0 auto;<br>
+                    }
+                </div>
+            </div>
+
+            <!-- 3. Padding (внутренние отступы) -->
+            <div class="theory-block">
+                <h2>🖌️ 3. Padding — внутренние отступы</h2>
+                <p>Расстояние от содержимого до границы элемента. Увеличивает общий размер блока.</p>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📐 Способы задания</span>
+                        <div class="code-example">
+                            /* Раздельно по сторонам */<br>
+                            padding-top: 10px;<br>
+                            padding-right: 20px;<br>
+                            padding-bottom: 10px;<br>
+                            padding-left: 20px;<br><br>
+                            /* Сокращённая запись */<br>
+                            padding: 15px;        /* все стороны */<br>
+                            padding: 10px 20px;   /* верх/низ, право/лево */
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🎨 Визуальный пример</span>
+                        <div class="padding-demo" style="background: #ffe0b2; border: 2px solid #e65100; padding: 30px;">
+                            Блок с padding: 30px (внутренний отступ)
+                        </div>
+                        <p style="font-size: 13px; color: #666;">Текст внутри блока отстоит от границы на 30px.</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <span class="badge">⚠️ Важно</span>
+                    <p>Если не задан <span class="inline-code">box-sizing: border-box</span>, то padding увеличивает общую ширину/высоту элемента.</p>
+                    <div class="code-example">
+                        /* Без border-box: ширина = 200px + 20px padding */<br>
+                        .block { width: 200px; padding: 10px; } /* реальная ширина 220px */
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Стилизация списков (list-style) -->
+            <div class="theory-block">
+                <h2>📋 4. Работа с маркерами списков (list-style)</h2>
+                <p>CSS предоставляет множество возможностей для оформления маркеров списков.</p>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🎯 list-style-type</span>
+                        <div class="list-style-demo">
+                            <ul style="list-style-type: square;">
+                                <li>square — маркер в виде квадрата</li>
+                            </ul>
+                            <ul style="list-style-type: circle;">
+                                <li>circle — маркер в виде незакрашенного круга</li>
+                            </ul>
+                            <ul style="list-style-type: none;">
+                                <li>none — маркер не отображается</li>
+                            </ul>
+                            <ol style="list-style-type: lower-roman;">
+                                <li>lower-roman — римские цифры (строчные)</li>
+                                <li>второй пункт</li>
+                            </ol>
+                            <ol style="list-style-type: upper-roman;">
+                                <li>upper-roman — римские цифры (заглавные)</li>
+                            </ol>
+                            <ol style="list-style-type: lower-alpha;">
+                                <li>lower-alpha — строчные буквы</li>
+                                <li>второй пункт</li>
+                            </ol>
+                            <ol style="list-style-type: upper-alpha;">
+                                <li>upper-alpha — заглавные буквы</li>
+                            </ol>
+                            <ol style="list-style-type: decimal;">
+                                <li>decimal — десятичные цифры (по умолчанию)</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🖼️ list-style-image</span>
+                        <p>Использование изображения в качестве маркера.</p>
+                        <div class="code-example">
+                            ul {<br>
+                            &nbsp;&nbsp;list-style-image: url("li.gif");<br>
+                            }
+                        </div>
+                        <div class="list-style-demo">
+                            <ul style="list-style-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' viewBox=\'0 0 16 16\'%3E%3Ccircle cx=\'8\' cy=\'8\' r=\'6\' fill=\'%23FF8C00\'/%3E%3C/svg%3E');">
+                                <li>Маркер в виде оранжевого круга</li>
+                                <li>Второй пункт списка</li>
+                            </ul>
+                        </div>
+                        <span class="badge" style="margin-top: 10px;">📝 list-style-position</span>
+                        <div class="code-example">
+                            ul { list-style-position: inside; } /* маркер внутри блока */<br>
+                            ul { list-style-position: outside; } /* маркер снаружи (по умолчанию) */
+                        </div>
+                    </div>
+                </div>
+                <div class="code-example">
+                    /* Свойство-сокращение list-style */<br>
+                    ul {<br>
+                    &nbsp;&nbsp;list-style: square inside url("li.gif");<br>
+                    }
+                </div>
+                <p>🔗 Подробнее: <a href="http://htmlbook.ru/css/list-style" target="_blank" style="color:#b86f1a;">htmlbook.ru/css/list-style</a></p>
+            </div>
+
+            <!-- 5. Примеры маркированных списков (из презентации) -->
+            <div class="theory-block">
+                <h2>🎨 5. Примеры оформления списков</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">● Маркированный список</span>
+                        <ul>
+                            <li>Красный</li>
+                            <li>Желтый</li>
+                            <li>Зеленый</li>
+                            <li>Синий</li>
+                        </ul>
+                        <ul style="list-style-type: circle;">
+                            <li>Красный</li>
+                            <li>Желтый</li>
+                            <li>Зеленый</li>
+                            <li>Синий</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">1. Нумерованный список</span>
+                        <ol>
+                            <li>Красный</li>
+                            <li>Желтый</li>
+                            <li>Зеленый</li>
+                            <li>Синий</li>
+                        </ol>
+                        <ol style="list-style-type: upper-roman;">
+                            <li>Иванов</li>
+                            <li>Петров</li>
+                            <li>Сидоров</li>
+                            <li>Николаев</li>
+                        </ol>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">α. Буквенный список</span>
+                        <ol style="list-style-type: lower-alpha;">
+                            <li>Иванов</li>
+                            <li>Петров</li>
+                            <li>Сидоров</li>
+                            <li>Николаев</li>
+                        </ol>
+                        <ol style="list-style-type: upper-alpha;">
+                            <li>Иванов</li>
+                            <li>Петров</li>
+                            <li>Сидоров</li>
+                            <li>Николаев</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Практическое задание -->
+            <div class="task-block">
+                <h3 style="color:#a55302; margin-top:0;">📌 Практическое задание</h3>
+                <p><strong>Создание проекта «Отступы_ФИ_П-15»</strong></p>
+                <ol style="margin-left: 25px; margin-top: 10px;">
+                    <li>Создайте в папке <strong>Документы</strong> папку <strong>Отступы_ФИ_П-15</strong> (где ФИ — ваши инициалы).</li>
+                    <li>Откройте программу <strong>Visual Studio Code</strong>.</li>
+                    <li>Создайте файл <strong>index1.html</strong> и файл <strong>style1.css</strong>.</li>
+                    <li>В HTML-файле создайте структуру документа и подключите CSS.</li>
+                    <li>Создайте блок с <span class="inline-code">id="green"</span> (например, div или section).</li>
+                    <li>Добавьте внешние отступы (margin) для этого блока:
+                        <div class="code-example" style="margin: 10px 0;">
+                            #green {<br>
+                            &nbsp;&nbsp;margin-top: 20px;<br>
+                            &nbsp;&nbsp;margin-right: 30px;<br>
+                            &nbsp;&nbsp;margin-bottom: 20px;<br>
+                            &nbsp;&nbsp;margin-left: 30px;<br>
+                            &nbsp;&nbsp;background-color: #90EE90;<br>
+                            &nbsp;&nbsp;padding: 15px;<br>
+                            }
+                        </div>
+                    </li>
+                    <li>Протестируйте разные значения margin и padding, наблюдая за изменениями.</li>
+                    <li>Добавьте на страницу несколько списков с разными типами маркеров (list-style-type).</li>
+                    <li>Попробуйте использовать <span class="inline-code">list-style-image</span> с произвольной картинкой.</li>
+                </ol>
+                <hr>
+                <p><span class="badge" style="background:#b4682d;">✅ Результат:</span> сохраните проект и продемонстрируйте работу всех отступов и стилей списков.</p>
+            </div>
+
+            <!-- 7. Дополнительные ресурсы -->
+            <div class="theory-block">
+                <h2>📚 6. Полезные ресурсы</h2>
+                <ul style="margin-left: 22px;">
+                    <li>📘 <a href="http://htmlbook.ru/css/margin" target="_blank" style="color:#b86f1a;">htmlbook.ru — margin</a></li>
+                    <li>📘 <a href="http://htmlbook.ru/css/padding" target="_blank" style="color:#b86f1a;">htmlbook.ru — padding</a></li>
+                    <li>📘 <a href="http://htmlbook.ru/css/list-style" target="_blank" style="color:#b86f1a;">htmlbook.ru — list-style</a></li>
+                    <li>🎨 <a href="https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Box_Model" target="_blank" style="color:#b86f1a;">MDN — блочная модель</a></li>
+                </ul>
+            </div>
+
+            <footer>
+                📘 E-BookStudy · Отступы в CSS. Управляйте пространством на странице с помощью margin и padding!
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Функция поиска и подсветки
+        function performSearch(inputElement, container) {
+            if (!inputElement || !container) return;
+            const query = inputElement.value.trim();
+            removeHighlights();
+            if (query === "") return;
+
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const nodesToReplace = [];
+
+            while (node = walker.nextNode()) {
+                if (node.parentNode.tagName === 'SCRIPT' ||
+                    node.parentNode.tagName === 'STYLE' ||
+                    node.parentNode.tagName === 'INPUT' ||
+                    node.parentNode.tagName === 'TEXTAREA') continue;
+
+                if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            nodesToReplace.forEach(node => {
+                const span = document.createElement('span');
+                span.innerHTML = node.textContent.replace(regex, '<mark class="highlight">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+
+            const firstResult = container.querySelector('.highlight');
+            if (firstResult) {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert("Ничего не найдено");
+            }
+        }
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(h => {
+                const parent = h.parentNode;
+                const text = parent.textContent;
+                const textNode = document.createTextNode(text);
+                parent.replaceWith(textNode);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('.main-content');
+            if (!main) return;
+
+            document.querySelectorAll('.btn-search').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const searchBox = btn.closest('.search-box');
+                    const input = searchBox.querySelector('.search-input');
+                    performSearch(input, main);
+                });
+            });
+
+            document.querySelectorAll('.search-input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchBox = input.closest('.search-box');
+                        const btn = searchBox.querySelector('.btn-search');
+                        if (btn) btn.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

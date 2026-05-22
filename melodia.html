@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Верстка ЖК Мелодия | E-BookStudy</title>
+    <style>
+        /* Базовые стили — полное соответствие сайту */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #FFFBD6;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+
+        /* Шапка сайта */
+        .header {
+            background-color: #D3D3D3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            border-bottom: 1px solid #aaa;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #FF8C00;
+        }
+        .nav a {
+            margin: 0 12px;
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav a:hover {
+            color: #FF8C00;
+        }
+        .theme-icon {
+            font-size: 24px;
+            cursor: default;
+        }
+
+        /* Контейнер + боковое меню */
+        .wrapper {
+            display: flex;
+            max-width: auto;
+            margin: 0 auto;
+            background: #FFFBD6;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #e9e9cf;
+            border-right: 1px solid #ccc;
+            padding: 20px 10px;
+        }
+        .sidebar-item {
+            display: block;
+            background: #ecece0;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 20px;
+            border: 1px solid #b3b38c;
+            text-decoration: none;
+            color: #2c2c2c;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .sidebar-item.active {
+            background: #FF8C00;
+            color: white;
+            font-weight: bold;
+            border-color: #FF8C00;
+        }
+        .sidebar-item:hover {
+            background: #FFD58C;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px;
+        }
+
+        h1 {
+            color: #FF8C00;
+            font-size: 32px;
+            margin-bottom: 12px;
+            border-left: 5px solid #FF8C00;
+            padding-left: 20px;
+        }
+        .desc {
+            font-size: 18px;
+            color: #4a4a2a;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #c0c09a;
+            padding-bottom: 12px;
+        }
+
+        /* стили для блоков с теорией */
+        .theory-block {
+            background: #fffdf0;
+            border-radius: 32px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #f0e2c5;
+        }
+        .theory-block h2 {
+            font-size: 26px;
+            color: #b45f06;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #FF8C00;
+            padding-left: 16px;
+        }
+        .theory-block h3 {
+            font-size: 22px;
+            margin: 20px 0 12px 0;
+            color: #c55a11;
+        }
+        .code-example {
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .inline-code {
+            background: #e9e2cd;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #a53f00;
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 20px 0;
+        }
+        .info-card {
+            background: #fef5e8;
+            border-radius: 24px;
+            padding: 18px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .badge {
+            background: #FF8C00;
+            color: white;
+            border-radius: 30px;
+            padding: 3px 12px;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        /* Демонстрация шапки сайта ЖК Мелодия */
+        .melody-demo {
+            background: #635854;
+            border-radius: 16px;
+            margin: 20px 0;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+        }
+        .demo-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .demo-logo img {
+            height: 40px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+        .demo-logo span {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .demo-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        .demo-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+        .demo-menu a:hover {
+            color: #F9A826;
+        }
+        .demo-contacts {
+            text-align: right;
+        }
+        .demo-contacts span {
+            display: block;
+            color: #F9A826;
+            font-size: 14px;
+        }
+        .demo-contacts a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .demo-navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .demo-menu {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .demo-contacts {
+                text-align: center;
+            }
+        }
+        
+        .task-block {
+            background: #fff0cf;
+            border-radius: 28px;
+            padding: 24px;
+            margin: 35px 0;
+            border-left: 8px solid #FF8C00;
+        }
+        .button-link {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            transition: 0.2s;
+        }
+        .button-link:hover {
+            background: #e07a00;
+            transform: scale(1.02);
+        }
+        hr {
+            margin: 25px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ffda9e, transparent);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #ddd8b0;
+            border-radius: 48px;
+            font-size: 14px;
+            color: #4f4f2f;
+        }
+        @media (max-width: 800px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .sidebar-item {
+                width: auto;
+                margin: 0;
+            }
+            .main-content {
+                padding: 20px;
+            }
+        }
+        .search-box {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-input {
+            width: 350px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background-color: #D3D3D3;
+            outline: none;
+            font-size: 14px;
+        }
+        .btn-search {
+            padding: 12px 35px;
+            border-radius: 25px;
+            border: none;
+            background-color: #999;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .btn-search:hover {
+            background-color: #888;
+        }
+        .highlight {
+            background-color: #FFD700;
+            color: black;
+            border-radius: 2px;
+        }
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background-color: #FF8C00;
+            color: white;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 13px;
+        }
+        .resource-link {
+            color: #b86f1a;
+            text-decoration: none;
+        }
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+        .plugin-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 15px 0;
+        }
+        .plugin-badge {
+            background: #f5e5c0;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            border: 1px solid #e1cfa4;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"> <a href="index.html"> E-Book<span>Study</span></a></div>
+        <div class="theme-icon"></div>
+    </header>
+
+    <div class="wrapper">
+        <!-- Боковое меню — как в предыдущих работах -->
+        <aside class="sidebar">
+            <a href="intro.html" class="sidebar-item">Вводное занятие</a>
+            <a href="vscode.html" class="sidebar-item">Visual Studio Code</a>
+            <a href="practice.html" class="sidebar-item">Тренажер</a>
+            <a href="links.html" class="sidebar-item">Ссылки и изображения</a>
+            <a href="tables.html" class="sidebar-item">Таблицы</a>
+            <a href="validator.html" class="sidebar-item">Валидность кода</a>
+            <a href="css.html" class="sidebar-item">Основы CSS</a>
+            <a href="text.html" class="sidebar-item">Текст</a>
+            <a href="margins.html" class="sidebar-item active">Отступы</a>
+            <a href="forms.html" class="sidebar-item">Формы</a>
+            <a href="website.html" class="sidebar-item">Мой первый сайт</a>
+            <a href="github.html" class="sidebar-item">GitHub</a>
+            <a href="melodia.html" class="sidebar-item">Верстка ЖК Мелодия</a>
+        </aside>
+
+        <main class="main-content">
+            <h1>🏢 Практическая верстка: Жилой комплекс "Мелодия"</h1>
+            <p class="desc">Вёрстка макета из Figma: шапка, навигация, адаптивность. Практическая работа по созданию современного сайта.</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Поиск">
+                <button class="btn-search">Найти</button>
+            </div>
+
+            <!-- 1. Настройка VS Code и плагины -->
+            <div class="theory-block">
+                <h2>⚙️ 1. Настройка VS Code. Список плагинов</h2>
+                <div class="plugin-list">
+                    <div class="plugin-badge">⚡ Emmet — уже встроен в VS Code</div>
+                    <div class="plugin-badge">🔄 Live Server — обновляет страницу в браузере</div>
+                    <div class="plugin-badge">📝 All Autocomplete — подсказывает названия классов</div>
+                    <div class="plugin-badge">✨ Prettier — форматирует код</div>
+                </div>
+                <div class="info-card">
+                    <span class="badge">🔗 Полезные ссылки</span>
+                    <p><a href="https://necolas.github.io/normalize.css/" target="_blank" class="resource-link">necolas.github.io/normalize.css</a> — файл normalize.css для сброса стилей браузера</p>
+                    <p><a href="https://fonts.google.com/" target="_blank" class="resource-link">fonts.google.com</a> — шрифты от Google (Roboto, Montserrat и др.)</p>
+                    <p><a href="https://www.figma.com/" target="_blank" class="resource-link">figma.com</a> — онлайн-редактор для работы с макетами</p>
+                </div>
+            </div>
+
+            <!-- 2. Демонстрация готовой шапки сайта -->
+            <div class="theory-block">
+                <h2>🎨 2. Результат верстки шапки сайта (ЖК Мелодия)</h2>
+                <div class="melody-demo">
+                    <div class="demo-navbar">
+                        <div class="demo-logo">
+                            <span>🏢 Мелодия</span>
+                        </div>
+                        <ul class="demo-menu">
+                            <li><a href="#">Главная</a></li>
+                            <li><a href="#">О комплексе</a></li>
+                            <li><a href="#">Квартиры</a></li>
+                            <li><a href="#">Инфраструктура</a></li>
+                            <li><a href="#">Контакты</a></li>
+                        </ul>
+                        <div class="demo-contacts">
+                            <span>Есть вопросы? Звоните!</span>
+                            <a href="tel:+78001234567">+7 (800) 123-45-67</a>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px;"><span class="badge">🎯 Цель</span> Сверстать шапку сайта в точном соответствии с макетом Figma: цвет фона <span class="inline-code">#635854</span>, шрифт Roboto, выравнивание через Flexbox.</p>
+            </div>
+
+            <!-- 3. Часть 1. Создание каркаса проекта -->
+            <div class="theory-block">
+                <h2>📁 3. Часть 1. Создаем каркас проекта</h2>
+                <div class="code-example">
+                    Проект/
+                    ├── index.html
+                    ├── css/
+                    │   ├── normalize.css
+                    │   └── style.css
+                    └── img/
+                        └── logo.svg
+                </div>
+                <ul style="margin-left: 25px; margin-top: 15px;">
+                    <li>1. Создайте папку проекта «ЖК_Мелодия_ФИ_П-17»</li>
+                    <li>2. Внутри создайте папки <span class="inline-code">css</span> и <span class="inline-code">img</span></li>
+                    <li>3. Создайте файл <span class="inline-code">index.html</span> и файл <span class="inline-code">css/style.css</span></li>
+                    <li>4. Скачайте <span class="inline-code">normalize.css</span> с <a href="https://necolas.github.io/normalize.css/" target="_blank" class="resource-link">necolas.github.io/normalize.css</a> и сохраните в папку <span class="inline-code">css/</span></li>
+                </ul>
+                <div class="code-example">
+                    &lt;!-- Подключение normalize.css и style.css в index.html --&gt;<br>
+                    &lt;link rel="stylesheet" href="css/normalize.css"&gt;<br>
+                    &lt;link rel="stylesheet" href="css/style.css"&gt;
+                </div>
+            </div>
+
+            <!-- 4. Часть 2. Пишем код для шапки сайта (пошаговая инструкция) -->
+            <div class="theory-block">
+                <h2>📝 4. Часть 2. Пошаговая вёрстка шапки сайта</h2>
+                
+                <h3>Шаг 1. Настройка HTML и подключение шрифтов</h3>
+                <div class="code-example">
+                    &lt;!DOCTYPE html&gt;<br>
+                    &lt;html lang="ru"&gt;<br>
+                    &lt;head&gt;<br>
+                    &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+                    &nbsp;&nbsp;&lt;title&gt;ЖК Мелодия&lt;/title&gt;<br>
+                    &nbsp;&nbsp;&lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"&gt;<br>
+                    &nbsp;&nbsp;&lt;link rel="stylesheet" href="css/normalize.css"&gt;<br>
+                    &nbsp;&nbsp;&lt;link rel="stylesheet" href="css/style.css"&gt;<br>
+                    &lt;/head&gt;<br>
+                    &lt;body&gt;<br>
+                    &nbsp;&nbsp;&lt;header class="header"&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="navbar"&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="./index.html" class="logo"&gt;&lt;img src="img/logo.svg" alt="Логотип ЖК Мелодия"&gt;&lt;/a&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul class="navbar-menu"&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;Главная&lt;/a&gt;&lt;/li&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;О комплексе&lt;/a&gt;&lt;/li&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;Квартиры&lt;/a&gt;&lt;/li&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;Инфраструктура&lt;/a&gt;&lt;/li&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;Контакты&lt;/a&gt;&lt;/li&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="contacts"&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;Есть вопросы? Звоните!&lt;/span&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="tel:+78001234567"&gt;+7 (800) 123-45-67&lt;/a&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                    &nbsp;&nbsp;&lt;/header&gt;<br>
+                    &lt;/body&gt;<br>
+                    &lt;/html&gt;
+                </div>
+
+                <h3>Шаг 2. Базовые стили (style.css)</h3>
+                <div class="code-example">
+                    * {<br>
+                    &nbsp;&nbsp;box-sizing: border-box;  /* правильный расчёт ширины и высоты */<br>
+                    }<br><br>
+                    body {<br>
+                    &nbsp;&nbsp;font-family: 'Roboto', sans-serif;<br>
+                    }<br><br>
+                    .header {<br>
+                    &nbsp;&nbsp;background-color: #635854;<br>
+                    &nbsp;&nbsp;padding: 20px 0;<br>
+                    }<br><br>
+                    .navbar {<br>
+                    &nbsp;&nbsp;max-width: 1280px;<br>
+                    &nbsp;&nbsp;margin: 0 auto;<br>
+                    &nbsp;&nbsp;display: flex;<br>
+                    &nbsp;&nbsp;justify-content: space-between;<br>
+                    &nbsp;&nbsp;align-items: center;<br>
+                    &nbsp;&nbsp;padding: 0 40px;<br>
+                    }<br><br>
+                    .navbar-menu {<br>
+                    &nbsp;&nbsp;display: flex;<br>
+                    &nbsp;&nbsp;list-style: none;<br>
+                    &nbsp;&nbsp;margin: 0;<br>
+                    &nbsp;&nbsp;padding: 0;<br>
+                    &nbsp;&nbsp;gap: 30px;<br>
+                    }<br><br>
+                    .navbar-menu a {<br>
+                    &nbsp;&nbsp;color: white;<br>
+                    &nbsp;&nbsp;text-decoration: none;<br>
+                    &nbsp;&nbsp;font-size: 16px;<br>
+                    }<br><br>
+                    .navbar-menu a:hover {<br>
+                    &nbsp;&nbsp;color: #F9A826;<br>
+                    }<br><br>
+                    .contacts {<br>
+                    &nbsp;&nbsp;text-align: right;<br>
+                    }<br><br>
+                    .contacts span {<br>
+                    &nbsp;&nbsp;color: #F9A826;<br>
+                    &nbsp;&nbsp;font-size: 14px;<br>
+                    }<br><br>
+                    .contacts a {<br>
+                    &nbsp;&nbsp;color: white;<br>
+                    &nbsp;&nbsp;text-decoration: none;<br>
+                    &nbsp;&nbsp;font-size: 20px;<br>
+                    &nbsp;&nbsp;font-weight: bold;<br>
+                    }
+                </div>
+
+                <h3>Шаг 3. Адаптивность (медиа-запросы)</h3>
+                <div class="code-example">
+                    @media (max-width: 768px) {<br>
+                    &nbsp;&nbsp;.navbar {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;flex-direction: column;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;gap: 20px;<br>
+                    &nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;.navbar-menu {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;flex-direction: column;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;align-items: center;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;gap: 15px;<br>
+                    &nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;.contacts {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;text-align: center;<br>
+                    &nbsp;&nbsp;}<br>
+                    }
+                </div>
+            </div>
+
+            <!-- 5. Работа с Figma и макетом -->
+            <div class="theory-block">
+                <h2>🎨 5. Работа с макетом в Figma</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📐 Регистрация</span>
+                        <p>Зарегистрируйтесь на сайте <a href="https://www.figma.com" target="_blank" class="resource-link">figma.com</a> — это бесплатно.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📥 Скачивание макета</span>
+                        <p>Скачайте файл <strong>Melody.fig</strong> (дизайн-макет сайта) из папки «16_Верстка ЖК Мелодия».</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <span class="badge">🔍 Инспектирование элементов в Figma</span>
+                    <p>Выделите любой элемент макета → во вкладке <strong>Inspect</strong> (справа) увидите точные CSS-свойства: цвет фона, размер шрифта, отступы, ширину.</p>
+                    <div class="code-example">
+                        Пример: background: #635854;  /* цвет фона шапки */
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Практическая работа (полная инструкция) -->
+            <div class="task-block">
+                <h3 style="color:#a55302; margin-top:0;">📌 Практическая работа по верстке «ЖК Мелодия»</h3>
+                <p><strong>Цель:</strong> Сверстать шапку сайта в точном соответствии с макетом Figma.</p>
+                <hr>
+                <p><span class="badge" style="background:#b4682d;">📋 Пошаговая инструкция</span></p>
+                <ul class="step-list" style="margin-left: 0; margin-top: 15px;">
+                    <li>Переименуйте <span class="inline-code">&lt;title&gt;</span> на <strong>ЖК Мелодия</strong>.</li>
+                    <li>Скачайте файл <strong>normalize.css</strong> и подключите его в HTML после title.</li>
+                    <li>Зарегистрируйтесь на <strong>Figma</strong> и скачайте макет <strong>Melody.fig</strong>.</li>
+                    <li>В макете изучите структуру шапки: логотип, навигационная панель, контактная информация.</li>
+                    <li>Создайте в body шапку сайта: <span class="inline-code">&lt;header class="header"&gt;</span>.</li>
+                    <li>Внутри header создайте <span class="inline-code">&lt;div class="navbar"&gt;</span>.</li>
+                    <li>Добавьте логотип (кликабельный <span class="inline-code">&lt;a&gt;</span> с картинкой). Скачайте логотип из Figma в формате SVG в папку <strong>img</strong>.</li>
+                    <li>Создайте навигационную панель — список <span class="inline-code">&lt;ul&gt;</span> со ссылками.</li>
+                    <li>Добавьте контактный блок: <span class="inline-code">&lt;span&gt;</span> с текстом и ссылка на телефон.</li>
+                    <li>В файле <strong>style.css</strong> пропишите стили:
+                        <ul style="margin-left: 25px; margin-top: 10px;">
+                            <li>Цвет фона шапки: <span class="inline-code">#635854</span></li>
+                            <li>Flexbox для navbar (<span class="inline-code">display: flex; justify-content: space-between; align-items: center;</span>)</li>
+                            <li>Уберите маркеры у списка (<span class="inline-code">list-style: none</span>)</li>
+                            <li>Уберите подчеркивание у ссылок (<span class="inline-code">text-decoration: none</span>), цвет ссылок — белый</li>
+                            <li>Добавьте отступы элементам навигации (<span class="inline-code">gap: 30px</span>)</li>
+                        </ul>
+                    </li>
+                    <li>Подключите шрифт <strong>Roboto</strong> с Google Fonts.</li>
+                    <li>Задайте внутренние отступы для header (<span class="inline-code">padding</span>).</li>
+                    <li>Добавьте полоску (border-bottom) для стилизации.</li>
+                    <li>Добавьте в начало стилей <span class="inline-code">* { box-sizing: border-box; }</span>.</li>
+                    <li>Напишите медиа-запросы для адаптивности (на мобильных устройствах меню становится вертикальным).</li>
+                </ul>
+                <hr>
+                <p><span class="badge" style="background:#b4682d;">✅ Результат работы</span> — готовая шапка сайта, соответствующая дизайну из Figma. Дальнейшая вёрстка основной части и подвала по макету.</p>
+                <p><strong>📎 Файл макета:</strong> <a href="https://drive.google.com/file/d/1xGxWYqKQigEE67Yb9psVjrki7_L53tqJ/view?usp=sharing" target="_blank" class="resource-link">Melody.fig (Google Drive)</a></p>
+            </div>
+
+            <!-- 7. Дополнительные ресурсы -->
+            <div class="theory-block">
+                <h2>📚 7. Полезные ресурсы</h2>
+                <ul style="margin-left: 22px;">
+                    <li>📘 <a href="https://necolas.github.io/normalize.css/" target="_blank" class="resource-link">normalize.css</a> — сброс стилей браузера</li>
+                    <li>🎨 <a href="https://fonts.google.com/" target="_blank" class="resource-link">Google Fonts</a> — бесплатные веб-шрифты</li>
+                    <li>🎨 <a href="https://www.figma.com/" target="_blank" class="resource-link">Figma</a> — онлайн-редактор для работы с макетами</li>
+                    <li>📘 <a href="https://html5book.ru/css3-flexbox/" target="_blank" class="resource-link">html5book.ru — Flexbox</a></li>
+                    <li>📘 <a href="https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Media_Queries" target="_blank" class="resource-link">MDN — Медиа-запросы (адаптивность)</a></li>
+                </ul>
+            </div>
+
+            <footer>
+                📘 E-BookStudy · Верстка ЖК Мелодия. Создайте современный адаптивный сайт по макету из Figma!
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Функция поиска и подсветки
+        function performSearch(inputElement, container) {
+            if (!inputElement || !container) return;
+            const query = inputElement.value.trim();
+            removeHighlights();
+            if (query === "") return;
+
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const nodesToReplace = [];
+
+            while (node = walker.nextNode()) {
+                if (node.parentNode.tagName === 'SCRIPT' ||
+                    node.parentNode.tagName === 'STYLE' ||
+                    node.parentNode.tagName === 'INPUT' ||
+                    node.parentNode.tagName === 'TEXTAREA') continue;
+
+                if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            nodesToReplace.forEach(node => {
+                const span = document.createElement('span');
+                span.innerHTML = node.textContent.replace(regex, '<mark class="highlight">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+
+            const firstResult = container.querySelector('.highlight');
+            if (firstResult) {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert("Ничего не найдено");
+            }
+        }
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(h => {
+                const parent = h.parentNode;
+                const text = parent.textContent;
+                const textNode = document.createTextNode(text);
+                parent.replaceWith(textNode);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('.main-content');
+            if (!main) return;
+
+            document.querySelectorAll('.btn-search').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const searchBox = btn.closest('.search-box');
+                    const input = searchBox.querySelector('.search-input');
+                    performSearch(input, main);
+                });
+            });
+
+            document.querySelectorAll('.search-input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchBox = input.closest('.search-box');
+                        const btn = searchBox.querySelector('.btn-search');
+                        if (btn) btn.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

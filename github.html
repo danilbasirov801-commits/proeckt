@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub | E-BookStudy</title>
+    <style>
+        /* Базовые стили — полное соответствие сайту */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #FFFBD6;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+
+        /* Шапка сайта */
+        .header {
+            background-color: #D3D3D3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            border-bottom: 1px solid #aaa;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #FF8C00;
+        }
+        .nav a {
+            margin: 0 12px;
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav a:hover {
+            color: #FF8C00;
+        }
+        .theme-icon {
+            font-size: 24px;
+            cursor: default;
+        }
+
+        /* Контейнер + боковое меню */
+        .wrapper {
+            display: flex;
+            max-width: auto;
+            margin: 0 auto;
+            background: #FFFBD6;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #e9e9cf;
+            border-right: 1px solid #ccc;
+            padding: 20px 10px;
+        }
+        .sidebar-item {
+            display: block;
+            background: #ecece0;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 20px;
+            border: 1px solid #b3b38c;
+            text-decoration: none;
+            color: #2c2c2c;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .sidebar-item.active {
+            background: #FF8C00;
+            color: white;
+            font-weight: bold;
+            border-color: #FF8C00;
+        }
+        .sidebar-item:hover {
+            background: #FFD58C;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px;
+        }
+
+        h1 {
+            color: #FF8C00;
+            font-size: 32px;
+            margin-bottom: 12px;
+            border-left: 5px solid #FF8C00;
+            padding-left: 20px;
+        }
+        .desc {
+            font-size: 18px;
+            color: #4a4a2a;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #c0c09a;
+            padding-bottom: 12px;
+        }
+
+        /* стили для блоков с теорией */
+        .theory-block {
+            background: #fffdf0;
+            border-radius: 32px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #f0e2c5;
+        }
+        .theory-block h2 {
+            font-size: 26px;
+            color: #b45f06;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #FF8C00;
+            padding-left: 16px;
+        }
+        .theory-block h3 {
+            font-size: 22px;
+            margin: 20px 0 12px 0;
+            color: #c55a11;
+        }
+        .code-example {
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .inline-code {
+            background: #e9e2cd;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #a53f00;
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 20px 0;
+        }
+        .info-card {
+            background: #fef5e8;
+            border-radius: 24px;
+            padding: 18px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .badge {
+            background: #FF8C00;
+            color: white;
+            border-radius: 30px;
+            padding: 3px 12px;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .git-command {
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 8px 15px;
+            border-radius: 12px;
+            font-family: monospace;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        .task-block {
+            background: #fff0cf;
+            border-radius: 28px;
+            padding: 24px;
+            margin: 35px 0;
+            border-left: 8px solid #FF8C00;
+        }
+        .button-link {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            transition: 0.2s;
+        }
+        .button-link:hover {
+            background: #e07a00;
+            transform: scale(1.02);
+        }
+        hr {
+            margin: 25px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ffda9e, transparent);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #ddd8b0;
+            border-radius: 48px;
+            font-size: 14px;
+            color: #4f4f2f;
+        }
+        @media (max-width: 800px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .sidebar-item {
+                width: auto;
+                margin: 0;
+            }
+            .main-content {
+                padding: 20px;
+            }
+        }
+        .search-box {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-input {
+            width: 350px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background-color: #D3D3D3;
+            outline: none;
+            font-size: 14px;
+        }
+        .btn-search {
+            padding: 12px 35px;
+            border-radius: 25px;
+            border: none;
+            background-color: #999;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .btn-search:hover {
+            background-color: #888;
+        }
+        .highlight {
+            background-color: #FFD700;
+            color: black;
+            border-radius: 2px;
+        }
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background-color: #FF8C00;
+            color: white;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 13px;
+        }
+        .resource-link {
+            color: #b86f1a;
+            text-decoration: none;
+        }
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"> <a href="index.html"> E-Book<span>Study</span></a></div>
+        <div class="theme-icon"></div>
+    </header>
+
+    <div class="wrapper">
+        <!-- Боковое меню — как в предыдущих работах -->
+        <aside class="sidebar">
+            <a href="intro.html" class="sidebar-item">Вводное занятие</a>
+            <a href="vscode.html" class="sidebar-item">Visual Studio Code</a>
+            <a href="practice.html" class="sidebar-item">Тренажер</a>
+            <a href="links.html" class="sidebar-item">Ссылки и изображения</a>
+            <a href="tables.html" class="sidebar-item">Таблицы</a>
+            <a href="validator.html" class="sidebar-item">Валидность кода</a>
+            <a href="css.html" class="sidebar-item">Основы CSS</a>
+            <a href="text.html" class="sidebar-item">Текст</a>
+            <a href="margins.html" class="sidebar-item">Отступы</a>
+            <a href="forms.html" class="sidebar-item">Формы</a>
+            <a href="website.html" class="sidebar-item">Мой первый сайт</a>
+            <a href="github.html" class="sidebar-item active">GitHub</a>
+            <a href="melodia.html" class="sidebar-item">Верстка ЖК Мелодия</a>
+        </aside>
+
+        <main class="main-content">
+            <h1>🐙 Система контроля версий Git и GitHub</h1>
+            <p class="desc">Управление версиями кода, совместная разработка, публикация сайтов в интернете. Лектор: Хаятова Лилия Рэхтямовна</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Поиск">
+                <button class="btn-search">Найти</button>
+            </div>
+
+            <!-- 1. Что такое Git и GitHub -->
+            <div class="theory-block">
+                <h2>📌 1. Что такое Git и GitHub?</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📦 Git</span>
+                        <p><strong>Git</strong> — это распределённая система контроля версий. Она позволяет отслеживать изменения в коде, возвращаться к предыдущим версиям, работать над проектом в команде.</p>
+                        <div class="git-command">git --version  # проверка установки</div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🌐 GitHub</span>
+                        <p><strong>GitHub</strong> — это веб-платформа для хостинга Git-репозиториев. Позволяет хранить код в облаке, делиться проектами, публиковать сайты через GitHub Pages.</p>
+                        <a href="https://github.com" target="_blank" class="resource-link">github.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Основные команды Git -->
+            <div class="theory-block">
+                <h2>⌨️ 2. Основные команды Git</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🚀 Инициализация и настройка</span>
+                        <div class="git-command">git init                      # создать репозиторий</div>
+                        <div class="git-command">git config --global user.name "Ваше Имя"</div>
+                        <div class="git-command">git config --global user.email "email@example.com"</div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📝 Сохранение изменений</span>
+                        <div class="git-command">git add .                      # добавить все файлы</div>
+                        <div class="git-command">git add index.html             # добавить конкретный файл</div>
+                        <div class="git-command">git commit -m "описание изменений"</div>
+                        <div class="git-command">git status                     # проверить состояние</div>
+                        <div class="git-command">git log                        # история коммитов</div>
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🔗 Работа с удалённым репозиторием</span>
+                        <div class="git-command">git remote add origin https://github.com/пользователь/репозиторий.git</div>
+                        <div class="git-command">git push -u origin main        # отправить изменения</div>
+                        <div class="git-command">git pull                       # получить изменения</div>
+                        <div class="git-command">git clone https://...          # склонировать репозиторий</div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🌿 Ветвление (branch)</span>
+                        <div class="git-command">git branch                     # список веток</div>
+                        <div class="git-command">git branch new-branch          # создать ветку</div>
+                        <div class="git-command">git checkout new-branch        # переключиться на ветку</div>
+                        <div class="git-command">git merge branch-name          # слияние веток</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. GitHub Pages — бесплатный хостинг -->
+            <div class="theory-block">
+                <h2>🌍 3. GitHub Pages — публикация сайта в интернете</h2>
+                <p><strong>GitHub Pages</strong> — бесплатный сервис для хостинга статических сайтов прямо из репозитория GitHub. Идеально подходит для портфолио, лендингов, учебных проектов.</p>
+                <div class="code-example">
+                    <!-- Как опубликовать сайт через GitHub Pages -->
+                    Шаг 1: Создайте репозиторий на GitHub<br>
+                    Шаг 2: Загрузите файлы сайта (index.html, css, img)<br>
+                    Шаг 3: Перейдите в Settings → Pages<br>
+                    Шаг 4: В разделе "Branch" выберите main (или master) и папку /root<br>
+                    Шаг 5: Сохраните — сайт станет доступен по адресу:<br>
+                    https://<strong>ваш_username</strong>.github.io/<strong>название_репозитория</strong>/
+                </div>
+                <div class="info-card">
+                    <span class="badge">💡 Важно</span>
+                    <p>Главный файл сайта должен называться <span class="inline-code">index.html</span> и находиться в корне репозитория (или в папке, выбранной в настройках). После публикации изменения появляются через 1-2 минуты.</p>
+                </div>
+            </div>
+
+            <!-- 4. Практическая работа -->
+            <div class="task-block">
+                <h3 style="color:#a55302; margin-top:0;">📌 Практическая работа</h3>
+                <p><strong>Тема: Публикация проекта сайта в сети интернет при помощи платформы GitHub</strong></p>
+                <p>🔗 <strong>Инструкция (подробная):</strong> <a href="https://docs.google.com/document/d/1TVRHKudfh1n1AwFoJpd0cgYwLUIAKni5_14mflFngOM/edit?usp=sharing" target="_blank" style="color:#FF8C00;">https://docs.google.com/document/d/1TVRHKudfh1n1AwFoJpd0cgYwLUIAKni5_14mflFngOM/</a></p>
+                <hr>
+                <p><span class="badge" style="background:#b4682d;">📋 Задание к публикации</span></p>
+                <ol style="margin-left: 25px; margin-top: 15px;">
+                    <li><strong>Мой первый сайт</strong> — сайт-портфолио верстальщика, созданный в практической работе по теме №13.</li>
+                    <li><strong>Сайт-визитка</strong> — краткая информация о себе, навыках, контактах (можно создать отдельную страницу или использовать уже готовый проект).</li>
+                </ol>
+                <hr>
+                <h3 style="color:#a55302; margin-top: 15px;">📝 Пошаговая инструкция публикации</h3>
+                <ul class="step-list" style="margin-left: 0; margin-top: 15px;">
+                    <li>Зарегистрируйтесь на <a href="https://github.com" target="_blank" class="resource-link">GitHub.com</a> (если ещё нет аккаунта).</li>
+                    <li>Создайте новый репозиторий (кнопка «New»), назовите его, например, <span class="inline-code">my-first-site</span>.</li>
+                    <li>Настройте Git на компьютере (установите с <a href="https://git-scm.com/" target="_blank" class="resource-link">git-scm.com</a>, если ещё не установлен).</li>
+                    <li>Откройте терминал (командную строку) в папке с вашим проектом «Мой первый сайт».</li>
+                    <li>Выполните команды:
+                        <div class="git-command">git init</div>
+                        <div class="git-command">git add .</div>
+                        <div class="git-command">git commit -m "Первый коммит: мой первый сайт"</div>
+                    </li>
+                    <li>Свяжите локальный репозиторий с удалённым:
+                        <div class="git-command">git remote add origin https://github.com/ВАШ_ЛОГИН/НАЗВАНИЕ_РЕПОЗИТОРИЯ.git</div>
+                    </li>
+                    <li>Отправьте код на GitHub:
+                        <div class="git-command">git push -u origin main</div>
+                        <small>(если основная ветка называется master, используйте <span class="inline-code">git push -u origin master</span>)</small>
+                    </li>
+                    <li>В репозитории на GitHub перейдите в <strong>Settings → Pages</strong>.</li>
+                    <li>В разделе "Branch" выберите <strong>main</strong> (или master), оставьте папку <strong>/(root)</strong>, нажмите Save.</li>
+                    <li>Через минуту сайт будет доступен по адресу: <strong>https://ВАШ_ЛОГИН.github.io/НАЗВАНИЕ_РЕПОЗИТОРИЯ/</strong></li>
+                    <li>Аналогично опубликуйте второй проект — «Сайт-визитку» (в отдельном репозитории).</li>
+                </ul>
+                <hr>
+                <p><span class="badge" style="background:#b4682d;">✅ Результат работы</span> — две активные ссылки на опубликованные сайты, которые можно отправить преподавателю или добавить в портфолио.</p>
+            </div>
+
+            <!-- 5. Полезные ресурсы -->
+            <div class="theory-block">
+                <h2>📚 5. Полезные ресурсы</h2>
+                <ul style="margin-left: 22px;">
+                    <li>📘 <a href="https://git-scm.com/book/ru/v2" target="_blank" class="resource-link">Официальная документация Git (книга Pro Git)</a></li>
+                    <li>📘 <a href="https://guides.github.com/" target="_blank" class="resource-link">GitHub Guides — официальные руководства</a></li>
+                    <li>🎮 <a href="https://learngitbranching.js.org/" target="_blank" class="resource-link">learngitbranching.js.org</a> — интерактивный тренажёр по Git</li>
+                    <li>📘 <a href="https://html5book.ru/git-github/" target="_blank" class="resource-link">html5book.ru — Git и GitHub для начинающих</a></li>
+                    <li>🐙 <a href="https://pages.github.com/" target="_blank" class="resource-link">GitHub Pages — официальный сайт</a></li>
+                </ul>
+            </div>
+
+            <!-- 6. Дополнительные советы -->
+            <div class="theory-block">
+                <h2>💡 6. Советы по работе с Git и GitHub</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📝 Правила хороших коммитов</span>
+                        <ul style="margin-left: 20px;">
+                            <li>Пишите осмысленные сообщения коммитов на русском или английском.</li>
+                            <li>Коммитьте логические завершённые изменения.</li>
+                            <li>Не коммитьте большие бинарные файлы (картинки лучше оптимизировать).</li>
+                            <li>Используйте <span class="inline-code">.gitignore</span>, чтобы исключить ненужные файлы (node_modules, .DS_Store).</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🤝 Совместная работа</span>
+                        <ul style="margin-left: 20px;">
+                            <li><span class="inline-code">Pull Request</span> — предложение изменений в чужой репозиторий.</li>
+                            <li><span class="inline-code">Fork</span> — копия репозитория для самостоятельной работы.</li>
+                            <li><span class="inline-code">Clone</span> — скачивание репозитория на компьютер.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="code-example">
+                    # Пример .gitignore для веб-проекта<br>
+                    .DS_Store<br>
+                    node_modules/<br>
+                    .vscode/<br>
+                    *.log<br>
+                    .env
+                </div>
+            </div>
+
+            <footer>
+                📘 E-BookStudy · Git и GitHub. Контролируйте версии кода и публикуйте сайты в интернете бесплатно!
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Функция поиска и подсветки
+        function performSearch(inputElement, container) {
+            if (!inputElement || !container) return;
+            const query = inputElement.value.trim();
+            removeHighlights();
+            if (query === "") return;
+
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const nodesToReplace = [];
+
+            while (node = walker.nextNode()) {
+                if (node.parentNode.tagName === 'SCRIPT' ||
+                    node.parentNode.tagName === 'STYLE' ||
+                    node.parentNode.tagName === 'INPUT' ||
+                    node.parentNode.tagName === 'TEXTAREA') continue;
+
+                if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            nodesToReplace.forEach(node => {
+                const span = document.createElement('span');
+                span.innerHTML = node.textContent.replace(regex, '<mark class="highlight">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+
+            const firstResult = container.querySelector('.highlight');
+            if (firstResult) {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert("Ничего не найдено");
+            }
+        }
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(h => {
+                const parent = h.parentNode;
+                const text = parent.textContent;
+                const textNode = document.createTextNode(text);
+                parent.replaceWith(textNode);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('.main-content');
+            if (!main) return;
+
+            document.querySelectorAll('.btn-search').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const searchBox = btn.closest('.search-box');
+                    const input = searchBox.querySelector('.search-input');
+                    performSearch(input, main);
+                });
+            });
+
+            document.querySelectorAll('.search-input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchBox = input.closest('.search-box');
+                        const btn = searchBox.querySelector('.btn-search');
+                        if (btn) btn.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
