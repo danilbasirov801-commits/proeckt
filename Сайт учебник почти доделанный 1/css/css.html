@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы CSS | E-BookStudy</title>
+    <style>
+        /* Базовые стили — полное соответствие сайту */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #FFFBD6;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+
+        /* Шапка сайта */
+        .header {
+            background-color: #D3D3D3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            border-bottom: 1px solid #aaa;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #FF8C00;
+        }
+        .nav a:hover {
+            color: #FF8C00;
+        }
+        .theme-icon {
+            font-size: 24px;
+            cursor: default;
+        }
+
+        /* Контейнер + боковое меню */
+        .wrapper {
+            display: flex;
+            max-width: auto;
+            margin: 0 auto;
+            background: #FFFBD6;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #e9e9cf;
+            border-right: 1px solid #ccc;
+            padding: 20px 10px;
+        }
+        .sidebar-item {
+            display: block;
+            background: #ecece0;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 20px;
+            border: 1px solid #b3b38c;
+            text-decoration: none;
+            color: #2c2c2c;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .sidebar-item.active {
+            background: #FF8C00;
+            color: white;
+            font-weight: bold;
+            border-color: #FF8C00;
+        }
+        .sidebar-item:hover {
+            background: #FFD58C;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px;
+        }
+
+        h1 {
+            color: #FF8C00;
+            font-size: 32px;
+            margin-bottom: 12px;
+            border-left: 5px solid #FF8C00;
+            padding-left: 20px;
+        }
+        .desc {
+            font-size: 18px;
+            color: #4a4a2a;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #c0c09a;
+            padding-bottom: 12px;
+        }
+
+        /* стили для блоков с теорией */
+        .theory-block {
+            background: #fffdf0;
+            border-radius: 32px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #f0e2c5;
+        }
+        .theory-block h2 {
+            font-size: 26px;
+            color: #b45f06;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #FF8C00;
+            padding-left: 16px;
+        }
+        .theory-block h3 {
+            font-size: 22px;
+            margin: 20px 0 12px 0;
+            color: #c55a11;
+        }
+        .code-example {
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .inline-code {
+            background: #e9e2cd;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #a53f00;
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 20px 0;
+        }
+        .info-card {
+            background: #fef5e8;
+            border-radius: 24px;
+            padding: 18px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .badge {
+            background: #FF8C00;
+            color: white;
+            border-radius: 30px;
+            padding: 3px 12px;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .selector-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .selector-table th,
+        .selector-table td {
+            border: 1px solid #d4c49c;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        .selector-table th {
+            background-color: #f0e5c6;
+            color: #7a581c;
+        }
+        .task-block {
+            background: #fff0cf;
+            border-radius: 28px;
+            padding: 24px;
+            margin: 35px 0;
+            border-left: 8px solid #FF8C00;
+        }
+        .button-link {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            transition: 0.2s;
+        }
+        .button-link:hover {
+            background: #e07a00;
+            transform: scale(1.02);
+        }
+        hr {
+            margin: 25px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ffda9e, transparent);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #ddd8b0;
+            border-radius: 48px;
+            font-size: 14px;
+            color: #4f4f2f;
+        }
+        @media (max-width: 800px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .sidebar-item {
+                width: auto;
+                margin: 0;
+            }
+            .main-content {
+                padding: 20px;
+            }
+        }
+        .search-box {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-input {
+            width: 350px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background-color: #D3D3D3;
+            outline: none;
+            font-size: 14px;
+        }
+        .btn-search {
+            padding: 12px 35px;
+            border-radius: 25px;
+            border: none;
+            background-color: #999;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .btn-search:hover {
+            background-color: #888;
+        }
+        .highlight {
+            background-color: #FFD700;
+            color: black;
+            border-radius: 2px;
+        }
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background-color: #FF8C00;
+            color: white;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 13px;
+        }
+        .class-rules {
+            background: #fef2da;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin: 15px 0;
+        }
+        .class-rules li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"> <a href="index.html"> E-Book<span>Study</span></a></div>
+        <div class="theme-icon"></div>
+    </header>
+
+    <div class="wrapper">
+        <!-- Боковое меню — как в предыдущих работах -->
+        <aside class="sidebar">
+            <a href="intro.html" class="sidebar-item">Вводное занятие</a>
+            <a href="vscode.html" class="sidebar-item">Visual Studio Code</a>
+            <a href="practice.html" class="sidebar-item">Тренажер</a>
+            <a href="links.html" class="sidebar-item">Ссылки и изображения</a>
+            <a href="tables.html" class="sidebar-item">Таблицы</a>
+            <a href="validator.html" class="sidebar-item">Валидность кода</a>
+            <a href="css.html" class="sidebar-item active">Основы CSS</a>
+            <a href="text.html" class="sidebar-item">Текст</a>
+            <a href="margins.html" class="sidebar-item">Отступы</a>
+            <a href="forms.html" class="sidebar-item">Формы</a>
+            <a href="website.html" class="sidebar-item">Мой первый сайт</a>
+            <a href="github.html" class="sidebar-item">GitHub</a>
+            <a href="melodia.html" class="sidebar-item">Верстка ЖК Мелодия</a>
+        </aside>
+
+        <main class="main-content">
+            <h1>🎨 Каскадные таблицы стилей (CSS)</h1>
+            <p class="desc">Язык оформления HTML-документов. Лектор: Хаятова Лилия Рэхтямовна</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Поиск">
+                <button class="btn-search">Найти</button>
+            </div>
+
+            <!-- 1. Что такое CSS -->
+            <div class="theory-block">
+                <h2>📌 1. Что такое CSS?</h2>
+                <p><strong>CSS (Cascading Style Sheets)</strong> — это язык таблиц стилей, который позволяет прикреплять стиль (например, шрифты и цвет) к структурированным документам HTML.</p>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📁 Создание файла CSS</span>
+                        <p>Файл стилей должен иметь расширение <span class="inline-code">.css</span>. Обычно его называют <span class="inline-code">style.css</span>.</p>
+                        <div class="code-example" style="margin-top: 8px;">
+                            style.css
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🔗 Подключение CSS к HTML</span>
+                        <p>Для связывания HTML-документа с CSS-файлом используется тег <span class="inline-code">&lt;link&gt;</span> внутри <span class="inline-code">&lt;head&gt;</span>.</p>
+                        <div class="code-example" style="margin-top: 8px;">
+                            &lt;link rel="stylesheet" href="css/style.css"&gt;
+                        </div>
+                    </div>
+                </div>
+                <div class="code-example">
+                    &lt;!-- Пример подключения внешних стилей и шрифта Google Fonts --&gt;<br>
+                    &lt;head&gt;<br>
+                    &nbsp;&nbsp;&lt;link rel="stylesheet" href="style.css"&gt;<br>
+                    &nbsp;&nbsp;&lt;link href="https://fonts.googleapis.com/css2?family=Lobster&amp;display=swap" rel="stylesheet"&gt;<br>
+                    &lt;/head&gt;
+                </div>
+                <p><span class="badge">💡 Важно</span> Атрибут <span class="inline-code">rel</span> всегда равен <span class="inline-code">stylesheet</span>, а в <span class="inline-code">href</span> указывается путь к CSS-файлу (относительный или абсолютный).</p>
+            </div>
+
+            <!-- 2. Синтаксис CSS -->
+            <div class="theory-block">
+                <h2>📝 2. Синтаксис CSS</h2>
+                <p>Каждому HTML-тегу соответствует <strong>селектор</strong> CSS. После селектора ставятся фигурные скобки <span class="inline-code">{}</span>, внутри которых пишутся <strong>CSS-свойства</strong>.</p>
+                <div class="code-example">
+                    селектор {<br>
+                    &nbsp;&nbsp;атрибут: значение;<br>
+                    &nbsp;&nbsp;атрибут: значение;<br>
+                    }
+                </div>
+                <div class="code-example">
+                    /* Пример: стили для всех абзацев */<br>
+                    p {<br>
+                    &nbsp;&nbsp;font-size: 16px;<br>
+                    &nbsp;&nbsp;color: #333;<br>
+                    }
+                </div>
+                <h3>💬 Комментарии в CSS</h3>
+                <div class="code-example">
+                    /* Это комментарий в CSS */<br>
+                    /* Он не влияет на отображение страницы */<br>
+                    h1 {<br>
+                    &nbsp;&nbsp;color: green; /* Можно комментировать отдельные свойства */<br>
+                    }
+                </div>
+            </div>
+
+            <!-- 3. Селекторы: тег, класс, id -->
+            <div class="theory-block">
+                <h2>🎯 3. Селекторы в CSS</h2>
+                <table class="selector-table">
+                    <thead>
+                        <tr><th>Тип селектора</th><th>Синтаксис</th><th>Пример</th><th>Вес (приоритет)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>По тегу</td><td><span class="inline-code">тег</span></td><td><span class="inline-code">p { }</span></td><td>1</td></tr>
+                        <tr><td>По классу</td><td><span class="inline-code">.класс</span></td><td><span class="inline-code">.heading { }</span></td><td>10</td></tr>
+                        <tr><td>По id</td><td><span class="inline-code">#id</span></td><td><span class="inline-code">#logo { }</span></td><td>100</td></tr>
+                        <tr><td>Универсальный</td><td><span class="inline-code">*</span></td><td><span class="inline-code">* { }</span></td><td>0</td></tr>
+                        <tr><td>Группировка</td><td><span class="inline-code">селектор, селектор</span></td><td><span class="inline-code">h1, h2 { }</span></td><td>—</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>📚 Пример использования классов</h3>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">HTML</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            &lt;h1 class="heading"&gt;Заголовок&lt;/h1&gt;<br>
+                            &lt;p&gt;Обычный абзац&lt;/p&gt;<br>
+                            &lt;h2 class="heading"&gt;Подзаголовок&lt;/h2&gt;
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">CSS</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            .heading {<br>
+                            &nbsp;&nbsp;color: red;<br>
+                            &nbsp;&nbsp;font-size: 24px;<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <h3>🏷️ Пример использования id</h3>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">HTML</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            &lt;h1 id="main-title"&gt;Главный заголовок&lt;/h1&gt;
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">CSS</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            #main-title {<br>
+                            &nbsp;&nbsp;color: blue;<br>
+                            &nbsp;&nbsp;text-align: center;<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <h3>⚖️ Вес CSS-селекторов</h3>
+                <div class="info-card">
+                    <p><span class="badge">id</span> имеет больший вес, чем <span class="inline-code">class</span>, а <span class="inline-code">class</span> — больший, чем селектор по тегу.</p>
+                    <div class="code-example" style="margin-top: 8px;">
+                        /* Стиль из id перекроет стиль из class */<br>
+                        #heading { color: blue; }   /* применится */<br>
+                        .heading { color: red; }
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Правила именования классов -->
+            <div class="theory-block">
+                <h2>📏 4. Правила именования классов</h2>
+                <div class="class-rules">
+                    <ul style="margin-left: 20px;">
+                        <li>❌ Класс не должен начинаться с цифры — <span class="inline-code">.1block</span> <strong>нельзя</strong>, но <span class="inline-code">.block1</span> — <strong>можно</strong>.</li>
+                        <li>❌ Класс не должен содержать русские буквы — <span class="inline-code">.кнопка</span> <strong>нельзя</strong>, <span class="inline-code">.knopka</span> — <strong>можно</strong>.</li>
+                        <li>✅ В имени класса допустимо использовать дефис (-) и подчёркивание (_) — <span class="inline-code">.view-design-block</span> и <span class="inline-code">.search_form_button</span>.</li>
+                        <li>✅ Класс можно начинать с дефиса и подчёркивания — <span class="inline-code">.__error__</span>.</li>
+                        <li>⚠️ Классы чувствительны к регистру — <span class="inline-code">.Red</span>, <span class="inline-code">.RED</span> и <span class="inline-code">.red</span> — это разные имена.</li>
+                    </ul>
+                </div>
+                <div class="code-example">
+                    /* Правильные имена классов */<br>
+                    .header { }<br>
+                    .main-content { }<br>
+                    .btn_submit { }<br>
+                    ._active { }<br>
+                    .card-item-1 { }
+                </div>
+            </div>
+
+            <!-- 5. Объединение правил -->
+            <div class="theory-block">
+                <h2>🔗 5. Объединение правил для нескольких селекторов</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">Через запятую</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            h1, h2, h3 {<br>
+                            &nbsp;&nbsp;color: green;<br>
+                            &nbsp;&nbsp;font-family: Arial;<br>
+                            }
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">Универсальный селектор *</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            * {<br>
+                            &nbsp;&nbsp;margin: 0;<br>
+                            &nbsp;&nbsp;padding: 0;<br>
+                            &nbsp;&nbsp;box-sizing: border-box;<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <p><span class="badge">💡 Совет</span> Универсальный селектор <span class="inline-code">*</span> применяет стили ко <strong>всем</strong> элементам на странице. Используйте его осторожно, обычно для сброса отступов.</p>
+            </div>
+
+            <!-- 6. Валидатор CSS -->
+            <div class="theory-block">
+                <h2>✅ 6. Проверка CSS на валидность</h2>
+                <p>Как и HTML, CSS можно проверить на соответствие стандартам. Существует официальный валидатор CSS от W3C.</p>
+                <div class="validator-card" style="background: linear-gradient(135deg, #fff8e8, #fff2de); border-radius: 28px; padding: 24px; text-align: center; border: 2px solid #ffe0aa; margin: 20px 0;">
+                    <div style="font-size: 48px; margin-bottom: 10px;">🔍</div>
+                    <h3 style="color: #b45f06; margin-bottom: 10px;">CSS Validation Service</h3>
+                    <p><a href="http://jigsaw.w3.org/css-validator/" target="_blank" style="color: #FF8C00; font-weight: bold;">http://jigsaw.w3.org/css-validator/</a></p>
+                    <a href="http://jigsaw.w3.org/css-validator/" target="_blank" class="button-link" style="margin-top: 15px; display: inline-block;">🌐 Открыть валидатор CSS</a>
+                </div>
+            </div>
+
+            <!-- 7. Практическая работа -->
+            <div class="task-block">
+                <h3 style="color:#a55302; margin-top:0;">📌 Практическая работа</h3>
+                <p><strong>Создание проекта «Практика по CSS» в Visual Studio Code</strong></p>
+                <ul class="step-list" style="margin-left: 0;">
+                    <li>Создайте в папке <strong>Документы</strong> папку <strong>Практика по CSS</strong></li>
+                    <li>Откройте программу <strong>Visual Studio Code</strong></li>
+                    <li>Создайте файл <strong>index.html</strong></li>
+                    <li>Создайте папку <strong>css</strong></li>
+                    <li>В папке <strong>css</strong> создайте файл <strong>style.css</strong></li>
+                    <li>Установите плагин <strong>Live Server</strong> (если ещё не установлен)</li>
+                    <li>В файле <strong>index.html</strong> нажмите <strong>Shift + !</strong> (на английской раскладке), затем <strong>Tab</strong> — создастся базовая структура HTML</li>
+                    <li>Измените <span class="inline-code">&lt;html lang="en"&gt;</span> на <span class="inline-code">&lt;html lang="ru"&gt;</span></li>
+                    <li>Замените содержимое <span class="inline-code">&lt;title&gt;</span> на <span class="inline-code">Практика по CSS</span></li>
+                    <li>В тег <span class="inline-code">&lt;body&gt;</span> добавьте абзац с текстом</li>
+                    <li>Сохраните изменения (<strong>Ctrl+S</strong>)</li>
+                    <li>В файле <span class="inline-code">style.css</span> напишите стили для абзаца (например, <span class="inline-code">color: red;</span>)</li>
+                    <li>Подключите CSS-файл в <span class="inline-code">&lt;head&gt;</span>:<br>
+                        <span class="inline-code">&lt;link rel="stylesheet" href="css/style.css"&gt;</span>
+                    </li>
+                    <li>Запустите <strong>Live Server</strong> (правой кнопкой по <span class="inline-code">index.html</span> → "Open with Live Server") и посмотрите результат в браузере</li>
+                </ul>
+                <hr>
+                <p><span class="badge" style="background:#b4682d;">🎯 Дополнительное задание</span></p>
+                <p><strong>Курс «Знакомство с HTML и CSS» — Глава 4. Основы CSS</strong></p>
+                <a href="https://htmlacademy.ru/courses/307" target="_blank" class="button-link" style="background:#bb741f;">🚀 Перейти к тренажеру HTML Academy</a>
+                <p style="margin-top: 12px; font-size: 14px;">🔗 Прямая ссылка: https://htmlacademy.ru/courses/307</p>
+            </div>
+
+            <!-- 8. Дополнительные ресурсы -->
+            <div class="theory-block">
+                <h2>📚 8. Полезные ресурсы</h2>
+                <ul style="margin-left: 22px;">
+                    <li>📘 <a href="https://html5book.ru/css-css3/" target="_blank" style="color:#b86f1a;">html5book.ru — справочник по CSS</a></li>
+                    <li>🔍 <a href="http://jigsaw.w3.org/css-validator/" target="_blank" style="color:#b86f1a;">W3C CSS Validator</a> — проверка стилей</li>
+                    <li>🎨 <a href="https://developer.mozilla.org/ru/docs/Web/CSS" target="_blank" style="color:#b86f1a;">MDN Web Docs — CSS</a></li>
+                    <li>💡 <a href="https://htmlacademy.ru/courses/307" target="_blank" style="color:#b86f1a;">HTML Academy — Основы CSS</a></li>
+                </ul>
+            </div>
+
+            <footer>
+                📘 E-BookStudy · Основы CSS. Оформляйте сайты стильно и профессионально!
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Функция поиска и подсветки
+        function performSearch(inputElement, container) {
+            if (!inputElement || !container) return;
+            const query = inputElement.value.trim();
+            removeHighlights();
+            if (query === "") return;
+
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const nodesToReplace = [];
+
+            while (node = walker.nextNode()) {
+                if (node.parentNode.tagName === 'SCRIPT' ||
+                    node.parentNode.tagName === 'STYLE' ||
+                    node.parentNode.tagName === 'INPUT' ||
+                    node.parentNode.tagName === 'TEXTAREA') continue;
+
+                if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            nodesToReplace.forEach(node => {
+                const span = document.createElement('span');
+                span.innerHTML = node.textContent.replace(regex, '<mark class="highlight">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+
+            const firstResult = container.querySelector('.highlight');
+            if (firstResult) {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert("Ничего не найдено");
+            }
+        }
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(h => {
+                const parent = h.parentNode;
+                const text = parent.textContent;
+                const textNode = document.createTextNode(text);
+                parent.replaceWith(textNode);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('.main-content');
+            if (!main) return;
+
+            document.querySelectorAll('.btn-search').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const searchBox = btn.closest('.search-box');
+                    const input = searchBox.querySelector('.search-input');
+                    performSearch(input, main);
+                });
+            });
+
+            document.querySelectorAll('.search-input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchBox = input.closest('.search-box');
+                        const btn = searchBox.querySelector('.btn-search');
+                        if (btn) btn.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

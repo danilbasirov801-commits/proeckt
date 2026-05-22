@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление текста | E-BookStudy</title>
+    <style>
+        /* Базовые стили — полное соответствие сайту */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #FFFBD6;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+
+        /* Шапка сайта */
+        .header {
+            background-color: #D3D3D3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            border-bottom: 1px solid #aaa;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #FF8C00;
+        }
+        .nav a {
+            margin: 0 12px;
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav a:hover {
+            color: #FF8C00;
+        }
+        .theme-icon {
+            font-size: 24px;
+            cursor: default;
+        }
+
+        /* Контейнер + боковое меню */
+        .wrapper {
+            display: flex;
+            max-width: auto;
+            margin: 0 auto;
+            background: #FFFBD6;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #e9e9cf;
+            border-right: 1px solid #ccc;
+            padding: 20px 10px;
+        }
+        .sidebar-item {
+            display: block;
+            background: #ecece0;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 20px;
+            border: 1px solid #b3b38c;
+            text-decoration: none;
+            color: #2c2c2c;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .sidebar-item.active {
+            background: #FF8C00;
+            color: white;
+            font-weight: bold;
+            border-color: #FF8C00;
+        }
+        .sidebar-item:hover {
+            background: #FFD58C;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px;
+        }
+
+        h1 {
+            color: #FF8C00;
+            font-size: 32px;
+            margin-bottom: 12px;
+            border-left: 5px solid #FF8C00;
+            padding-left: 20px;
+        }
+        .desc {
+            font-size: 18px;
+            color: #4a4a2a;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #c0c09a;
+            padding-bottom: 12px;
+        }
+
+        /* стили для блоков с теорией */
+        .theory-block {
+            background: #fffdf0;
+            border-radius: 32px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #f0e2c5;
+        }
+        .theory-block h2 {
+            font-size: 26px;
+            color: #b45f06;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #FF8C00;
+            padding-left: 16px;
+        }
+        .theory-block h3 {
+            font-size: 22px;
+            margin: 20px 0 12px 0;
+            color: #c55a11;
+        }
+        .code-example {
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .inline-code {
+            background: #e9e2cd;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #a53f00;
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 20px 0;
+        }
+        .info-card {
+            background: #fef5e8;
+            border-radius: 24px;
+            padding: 18px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .badge {
+            background: #FF8C00;
+            color: white;
+            border-radius: 30px;
+            padding: 3px 12px;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .demo-text {
+            background: #fff9e8;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #ffe0aa;
+        }
+        .color-demo {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 5px;
+        }
+        .task-block {
+            background: #fff0cf;
+            border-radius: 28px;
+            padding: 24px;
+            margin: 35px 0;
+            border-left: 8px solid #FF8C00;
+        }
+        .button-link {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            transition: 0.2s;
+        }
+        .button-link:hover {
+            background: #e07a00;
+            transform: scale(1.02);
+        }
+        hr {
+            margin: 25px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ffda9e, transparent);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #ddd8b0;
+            border-radius: 48px;
+            font-size: 14px;
+            color: #4f4f2f;
+        }
+        @media (max-width: 800px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .sidebar-item {
+                width: auto;
+                margin: 0;
+            }
+            .main-content {
+                padding: 20px;
+            }
+        }
+        .search-box {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-input {
+            width: 350px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background-color: #D3D3D3;
+            outline: none;
+            font-size: 14px;
+        }
+        .btn-search {
+            padding: 12px 35px;
+            border-radius: 25px;
+            border: none;
+            background-color: #999;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .btn-search:hover {
+            background-color: #888;
+        }
+        .highlight {
+            background-color: #FFD700;
+            color: black;
+            border-radius: 2px;
+        }
+        .font-family-demo {
+            font-family: 'Courier New', monospace;
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 10px;
+            border-radius: 12px;
+        }
+        .border-demo {
+            border: 2px solid #b45f06;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .list-demo {
+            padding-left: 30px;
+            margin: 10px 0;
+        }
+        .color-table {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"> <a href="index.html"> E-Book<span>Study</span></a></div>
+        <div class="theme-icon"></div>
+    </header>
+
+    <div class="wrapper">
+        <!-- Боковое меню — как в предыдущих работах -->
+        <aside class="sidebar">
+            <a href="intro.html" class="sidebar-item">Вводное занятие</a>
+            <a href="vscode.html" class="sidebar-item">Visual Studio Code</a>
+            <a href="practice.html" class="sidebar-item">Тренажер</a>
+            <a href="links.html" class="sidebar-item">Ссылки и изображения</a>
+            <a href="tables.html" class="sidebar-item">Таблицы</a>
+            <a href="validator.html" class="sidebar-item">Валидность кода</a>
+            <a href="css.html" class="sidebar-item">Основы CSS</a>
+            <a href="text.html" class="sidebar-item">Текст</a>
+            <a href="margins.html" class="sidebar-item active">Отступы</a>
+            <a href="forms.html" class="sidebar-item">Формы</a>
+            <a href="website.html" class="sidebar-item">Мой первый сайт</a>
+            <a href="github.html" class="sidebar-item">GitHub</a>
+            <a href="melodia.html" class="sidebar-item">Верстка ЖК Мелодия</a>
+        </aside>
+
+        <main class="main-content">
+            <h1>✍️ Работа с текстом в CSS</h1>
+            <p class="desc">Шрифты, размеры, выравнивание, декоративные эффекты, списки и границы. Лектор: Хаятова Лилия Рэхтямовна</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Поиск">
+                <button class="btn-search">Найти</button>
+            </div>
+
+            <!-- 1. HTML-теги для форматирования текста -->
+            <div class="theory-block">
+                <h2>📌 1. HTML-теги для форматирования текста</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🔖 Выделение и форматирование</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            &lt;mark&gt;подсветка&lt;/mark&gt;<br>
+                            &lt;del&gt;удаленный текст&lt;/del&gt;<br>
+                            &lt;s&gt;зачеркнутый&lt;/s&gt;<br>
+                            &lt;ins&gt;дополнение&lt;/ins&gt;<br>
+                            &lt;u&gt;подчеркнутый&lt;/u&gt;<br>
+                            &lt;strong&gt;важный жирный&lt;/strong&gt;<br>
+                            &lt;b&gt;жирный&lt;/b&gt;<br>
+                            &lt;em&gt;важный курсив&lt;/em&gt;<br>
+                            &lt;i&gt;курсив&lt;/i&gt;
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🔢 Степени и формулы</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            x&lt;sup&gt;2&lt;/sup&gt; → x²<br>
+                            H&lt;sub&gt;2&lt;/sub&gt;O → H₂O
+                        </div>
+                        <span class="badge" style="margin-top: 10px;">💬 Цитаты и время</span>
+                        <div class="code-example" style="margin-top: 8px;">
+                            &lt;q&gt;цитата в тексте&lt;/q&gt;<br>
+                            &lt;blockquote&gt;блок с цитатой&lt;/blockquote&gt;<br>
+                            &lt;time datetime="2020-08-19T10:00"&gt;10:00 19.08.2020&lt;/time&gt;<br>
+                            &lt;address&gt;улица Пушкина, дом Колотушкина&lt;/address&gt;
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-text">
+                    <p>Пример: <mark>подсвеченный текст</mark>, <del>удаленный</del>, <s>зачеркнутый</s>, <ins>дополнение</ins>, <u>подчеркнутый</u>.</p>
+                    <p><strong>Важный жирный текст</strong>, <b>просто жирный</b>, <em>важный курсив</em>, <i>просто курсив</i>.</p>
+                    <p>Математика: x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup>. Химия: H<sub>2</sub>O и CO<sub>2</sub>.</p>
+                    <p><q>Краткая цитата</q> внутри текста.</p>
+                    <blockquote style="margin-left: 20px; padding: 10px; background: #f5e5c0; border-radius: 12px;">
+                        Блок с цитатой. Здесь может быть длинная цитата или важное высказывание.
+                        <cite>— источник</cite>
+                    </blockquote>
+                    <p><time datetime="2025-01-15">15 января 2025 года</time></p>
+                    <address>г. Москва, ул. Тверская, д. 1</address>
+                </div>
+            </div>
+
+            <!-- 2. CSS свойства для текста -->
+            <div class="theory-block">
+                <h2>🎨 2. CSS свойства для оформления текста</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📏 font-size</span>
+                        <p>Размер шрифта: <span class="inline-code">px, pt, em, rem, %</span></p>
+                        <div class="code-example">font-size: 16px; /* 16 пикселей */</div>
+                        
+                        <span class="badge" style="margin-top: 10px;">🔤 font-family</span>
+                        <p>Тип шрифта (семейство). Важно использовать <strong>веб-безопасные шрифты</strong>.</p>
+                        <div class="code-example">font-family: "Arial", "Helvetica", sans-serif;</div>
+                        
+                        <span class="badge" style="margin-top: 10px;">💪 font-weight</span>
+                        <p>Жирность: <span class="inline-code">bold, normal, 100-900</span></p>
+                        <div class="code-example">font-weight: bold;</div>
+                        
+                        <span class="badge" style="margin-top: 10px;">✒️ font-style</span>
+                        <p>Курсив: <span class="inline-code">italic, normal</span></p>
+                        <div class="code-example">font-style: italic;</div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📐 text-align</span>
+                        <p>Выравнивание: <span class="inline-code">left, right, center, justify</span></p>
+                        <div class="code-example">text-align: center;</div>
+                        
+                        <span class="badge" style="margin-top: 10px;">🎨 color</span>
+                        <p>Цвет текста: имя, HEX, RGB, RGBA</p>
+                        <div class="code-example">color: #e0b743; color: rgb(255, 0, 0);</div>
+                        
+                        <span class="badge" style="margin-top: 10px;">📝 text-decoration</span>
+                        <p>Оформление: <span class="inline-code">underline, overline, line-through, none</span></p>
+                        <div class="code-example">text-decoration: underline;</div>
+                        
+                        <span class="badge" style="margin-top: 10px;">🔠 text-transform</span>
+                        <p>Регистр: <span class="inline-code">uppercase, lowercase, capitalize</span></p>
+                        <div class="code-example">text-transform: uppercase;</div>
+                    </div>
+                </div>
+                
+                <h3>📏 line-height и text-indent</h3>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📏 line-height</span>
+                        <p>Межстрочный интервал. Рекомендуется 1.5 для удобочитаемости.</p>
+                        <div class="code-example">line-height: 1.5;</div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📝 text-indent</span>
+                        <p>Красная строка (отступ первой строки).</p>
+                        <div class="code-example">text-indent: 20px;</div>
+                    </div>
+                </div>
+
+                <h3>🎯 Свойство-сокращение font</h3>
+                <div class="code-example">
+                    /* Порядок: курсив жирность размер_шрифта / line-height семейство_шрифта */<br>
+                    font: italic bold 16px/1.5 "Arial", sans-serif;
+                </div>
+            </div>
+
+            <!-- 3. Веб-безопасные шрифты и Google Fonts -->
+            <div class="theory-block">
+                <h2>🔤 3. Семейства шрифтов и Google Fonts</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📚 Основные семейства</span>
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li><strong>serif</strong> — с засечками (Times New Roman)</li>
+                            <li><strong>sans-serif</strong> — без засечек (Arial, Helvetica)</li>
+                            <li><strong>cursive</strong> — курсивные (Comic Sans MS)</li>
+                            <li><strong>fantasy</strong> — декоративные</li>
+                            <li><strong>monospace</strong> — моноширинные (Courier New)</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🌐 Google Fonts</span>
+                        <p>Бесплатные веб-шрифты от Google. Подключаются через <span class="inline-code">&lt;link&gt;</span> или <span class="inline-code">@import</span>.</p>
+                        <div class="code-example" style="font-size: 12px;">
+                            &lt;link href="https://fonts.googleapis.com/css2?family=Lobster&amp;display=swap" rel="stylesheet"&gt;
+                        </div>
+                        <a href="https://fonts.google.com/" target="_blank" style="color: #FF8C00;">https://fonts.google.com/</a>
+                    </div>
+                </div>
+                <div class="demo-text">
+                    <p style="font-family: 'Times New Roman', serif;">serif — шрифт с засечками</p>
+                    <p style="font-family: Arial, sans-serif;">sans-serif — рубленый шрифт</p>
+                    <p style="font-family: 'Courier New', monospace;">monospace — моноширинный шрифт</p>
+                </div>
+            </div>
+
+            <!-- 4. Цвета в CSS -->
+            <div class="theory-block">
+                <h2>🎨 4. Способы задания цвета</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🏷️ По имени</span>
+                        <div class="color-demo" style="background-color: red;"></div>
+                        <code>red, blue, green, black</code>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">#️⃣ Шестнадцатеричный код</span>
+                        <div class="color-demo" style="background-color: #e0b743;"></div>
+                        <code>#e0b743, #ffbb00 (#fb0)</code>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🌈 rgb() / rgba()</span>
+                        <div class="color-demo" style="background-color: rgb(255, 0, 0);"></div>
+                        <code>rgb(255,0,0), rgba(0,0,0,0.5)</code>
+                    </div>
+                </div>
+                <p>🔗 Табличные цвета: <a href="https://colorscheme.ru/html-colors.html" target="_blank" style="color:#b86f1a;">colorscheme.ru/html-colors.html</a></p>
+            </div>
+
+            <!-- 5. Границы и скругления -->
+            <div class="theory-block">
+                <h2>📦 5. Границы (border) и скругления (border-radius)</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📐 Свойства границы</span>
+                        <ul style="margin-left: 20px;">
+                            <li><span class="inline-code">border-width</span> — толщина</li>
+                            <li><span class="inline-code">border-color</span> — цвет</li>
+                            <li><span class="inline-code">border-style</span> — тип: <span class="inline-code">solid, dotted, dashed, ridge, double</span></li>
+                        </ul>
+                        <div class="code-example">
+                            border: 2px solid #b45f06;
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🔄 Скругление углов</span>
+                        <div class="code-example">
+                            border-radius: 10px; /* все углы */<br>
+                            border-radius: 10px 20px 5px 15px;<br>
+                            border-radius: 20px 10px;
+                        </div>
+                        <div class="border-demo" style="border-radius: 15px;">
+                            Пример скруглённых углов
+                        </div>
+                    </div>
+                </div>
+                <div class="code-example">
+                    /* Границы для отдельных сторон */<br>
+                    border-left: 3px solid red;<br>
+                    border-right: 2px dashed blue;<br>
+                    border-top: 1px dotted green;<br>
+                    border-bottom: 4px double orange;
+                </div>
+            </div>
+
+            <!-- 6. Фон: background-color, background-image -->
+            <div class="theory-block">
+                <h2>🖼️ 6. Фоновые свойства</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🎨 background-color</span>
+                        <p>Заливка фона одним цветом.</p>
+                        <div class="code-example">background-color: #f5e5c0;</div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🖼️ background-image</span>
+                        <p>Фоновая картинка.</p>
+                        <div class="code-example">background-image: url("bg.png");</div>
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🔁 background-repeat</span>
+                        <p>Повторение: <span class="inline-code">no-repeat, repeat-x, repeat-y</span></p>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📍 background-position</span>
+                        <p>Позиция: <span class="inline-code">top, bottom, left, right, center</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Списки в HTML и CSS -->
+            <div class="theory-block">
+                <h2>📋 7. Списки: ul, ol, dl</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">🔘 Неупорядоченный список (ul)</span>
+                        <div class="code-example">
+                            &lt;ul type="disc"&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;чай&lt;/li&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;кофе&lt;/li&gt;<br>
+                            &lt;/ul&gt;
+                        </div>
+                        <ul class="list-demo">
+                            <li>чай</li>
+                            <li>кофе</li>
+                            <li>какао</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🔢 Упорядоченный список (ol)</span>
+                        <div class="code-example">
+                            &lt;ol type="A" start="3"&gt;<br>
+                            &nbsp;&nbsp;&lt;li&gt;первый&lt;/li&gt;<br>
+                            &lt;/ol&gt;
+                        </div>
+                        <ol class="list-demo" type="A" start="3">
+                            <li>пункт A3</li>
+                            <li>пункт A4</li>
+                        </ol>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📖 Список определений (dl)</span>
+                        <div class="code-example">
+                            &lt;dl&gt;<br>
+                            &nbsp;&nbsp;&lt;dt&gt;HTML&lt;/dt&gt;<br>
+                            &nbsp;&nbsp;&lt;dd&gt;язык разметки&lt;/dd&gt;<br>
+                            &lt;/dl&gt;
+                        </div>
+                        <dl class="list-demo">
+                            <dt>HTML</dt>
+                            <dd>язык гипертекстовой разметки</dd>
+                            <dt>CSS</dt>
+                            <dd>каскадные таблицы стилей</dd>
+                        </dl>
+                    </div>
+                </div>
+                <h3>📌 Стилизация списков (list-style)</h3>
+                <div class="code-example">
+                    ul { list-style: square outside; }<br>
+                    ol { list-style: upper-roman inside; }<br>
+                    /* list-style-type: disc, circle, square, decimal, lower-alpha и др. */
+                </div>
+                <p>🔗 Подробнее: <a href="http://htmlbook.ru/css/list-style" target="_blank" style="color:#b86f1a;">htmlbook.ru/css/list-style</a></p>
+            </div>
+
+            <!-- 8. Единицы измерения -->
+            <div class="theory-block">
+                <h2>📏 8. Единицы измерения в CSS</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📐 Абсолютные</span>
+                        <p><span class="inline-code">px</span> (пиксели), <span class="inline-code">cm</span>, <span class="inline-code">mm</span>, <span class="inline-code">pt</span> (пункты)</p>
+                        <div class="code-example">font-size: 38px; width: 500px;</div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">📊 Относительные</span>
+                        <p><span class="inline-code">em</span> (относительно родителя), <span class="inline-code">rem</span> (относительно корня), <span class="inline-code">%</span> (проценты)</p>
+                        <div class="code-example">font-size: 2em; width: 50%;</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Практическое задание -->
+            <div class="task-block">
+                <h3 style="color:#a55302; margin-top:0;">📌 Практическое задание</h3>
+                <p><strong>Курс «Знакомство с HTML и CSS» — Глава 2. Разметка текста</strong></p>
+                <a href="https://htmlacademy.ru/courses/301" target="_blank" class="button-link" style="background:#bb741f;">🚀 Перейти к тренажеру HTML Academy</a>
+                <p style="margin-top: 12px; font-size: 14px;">🔗 Прямая ссылка: https://htmlacademy.ru/courses/301</p>
+                <hr>
+                <p><span class="badge" style="background:#b4682d;">✏️ Задания для самостоятельной работы</span></p>
+                <ol style="margin-left: 25px; margin-top: 10px;">
+                    <li>Создайте HTML-страницу с использованием всех изученных тегов форматирования текста (<span class="inline-code">&lt;mark&gt;, &lt;del&gt;, &lt;ins&gt;, &lt;sup&gt;, &lt;sub&gt;</span>).</li>
+                    <li>Подключите шрифт из Google Fonts (например, Roboto или Lobster).</li>
+                    <li>Примените CSS-стили: измените цвет текста, добавьте фон, установите красную строку через <span class="inline-code">text-indent</span>.</li>
+                    <li>Создайте список определений (dl) с 3 терминами и их описаниями.</li>
+                    <li>Добавьте границу с закруглёнными углами для блока с текстом.</li>
+                </ol>
+                <p style="margin-top: 12px;">✅ Результат сохраните в файл <span class="inline-code">text-demo.html</span> и проверьте в браузере.</p>
+            </div>
+
+            <!-- 10. Дополнительные ресурсы -->
+            <div class="theory-block">
+                <h2>📚 9. Полезные ресурсы</h2>
+                <ul style="margin-left: 22px;">
+                    <li>📘 <a href="https://html5book.ru/css-css3/" target="_blank" style="color:#b86f1a;">html5book.ru — справочник по CSS</a></li>
+                    <li>🎨 <a href="https://fonts.google.com/" target="_blank" style="color:#b86f1a;">Google Fonts — бесплатные шрифты</a></li>
+                    <li>🎨 <a href="https://colorscheme.ru/html-colors.html" target="_blank" style="color:#b86f1a;">Таблица цветов HTML</a></li>
+                    <li>📖 <a href="http://htmlbook.ru/css/list-style" target="_blank" style="color:#b86f1a;">list-style — стилизация списков</a></li>
+                </ul>
+            </div>
+
+            <footer>
+                📘 E-BookStudy · Оформление текста. Создавайте красивые и читаемые веб-страницы!
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Функция поиска и подсветки
+        function performSearch(inputElement, container) {
+            if (!inputElement || !container) return;
+            const query = inputElement.value.trim();
+            removeHighlights();
+            if (query === "") return;
+
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const nodesToReplace = [];
+
+            while (node = walker.nextNode()) {
+                if (node.parentNode.tagName === 'SCRIPT' ||
+                    node.parentNode.tagName === 'STYLE' ||
+                    node.parentNode.tagName === 'INPUT' ||
+                    node.parentNode.tagName === 'TEXTAREA') continue;
+
+                if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            nodesToReplace.forEach(node => {
+                const span = document.createElement('span');
+                span.innerHTML = node.textContent.replace(regex, '<mark class="highlight">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+
+            const firstResult = container.querySelector('.highlight');
+            if (firstResult) {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert("Ничего не найдено");
+            }
+        }
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(h => {
+                const parent = h.parentNode;
+                const text = parent.textContent;
+                const textNode = document.createTextNode(text);
+                parent.replaceWith(textNode);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('.main-content');
+            if (!main) return;
+
+            document.querySelectorAll('.btn-search').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const searchBox = btn.closest('.search-box');
+                    const input = searchBox.querySelector('.search-input');
+                    performSearch(input, main);
+                });
+            });
+
+            document.querySelectorAll('.search-input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchBox = input.closest('.search-box');
+                        const btn = searchBox.querySelector('.btn-search');
+                        if (btn) btn.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

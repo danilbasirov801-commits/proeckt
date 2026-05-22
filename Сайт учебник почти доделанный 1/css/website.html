@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой первый сайт | E-BookStudy</title>
+    <style>
+        /* Базовые стили — полное соответствие сайту */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #FFFBD6;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+
+        /* Шапка сайта */
+        .header {
+            background-color: #D3D3D3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            border-bottom: 1px solid #aaa;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #FF8C00;
+        }
+        .nav a {
+            margin: 0 12px;
+            text-decoration: none;
+            color: #1e1e1e;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav a:hover {
+            color: #FF8C00;
+        }
+        .theme-icon {
+            font-size: 24px;
+            cursor: default;
+        }
+
+        /* Контейнер + боковое меню */
+        .wrapper {
+            display: flex;
+            max-width: auto;
+            margin: 0 auto;
+            background: #FFFBD6;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #e9e9cf;
+            border-right: 1px solid #ccc;
+            padding: 20px 10px;
+        }
+        .sidebar-item {
+            display: block;
+            background: #ecece0;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 20px;
+            border: 1px solid #b3b38c;
+            text-decoration: none;
+            color: #2c2c2c;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .sidebar-item.active {
+            background: #FF8C00;
+            color: white;
+            font-weight: bold;
+            border-color: #FF8C00;
+        }
+        .sidebar-item:hover {
+            background: #FFD58C;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            padding: 30px 40px;
+        }
+
+        h1 {
+            color: #FF8C00;
+            font-size: 32px;
+            margin-bottom: 12px;
+            border-left: 5px solid #FF8C00;
+            padding-left: 20px;
+        }
+        .desc {
+            font-size: 18px;
+            color: #4a4a2a;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #c0c09a;
+            padding-bottom: 12px;
+        }
+
+        /* стили для блоков с теорией */
+        .theory-block {
+            background: #fffdf0;
+            border-radius: 32px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #f0e2c5;
+        }
+        .theory-block h2 {
+            font-size: 26px;
+            color: #b45f06;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #FF8C00;
+            padding-left: 16px;
+        }
+        .theory-block h3 {
+            font-size: 22px;
+            margin: 20px 0 12px 0;
+            color: #c55a11;
+        }
+        .code-example {
+            background: #2d2d24;
+            color: #f8f8f2;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .inline-code {
+            background: #e9e2cd;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #a53f00;
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 20px 0;
+        }
+        .info-card {
+            background: #fef5e8;
+            border-radius: 24px;
+            padding: 18px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .badge {
+            background: #FF8C00;
+            color: white;
+            border-radius: 30px;
+            padding: 3px 12px;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        /* Демонстрация готового сайта */
+        .website-preview {
+            background: #fff5e6;
+            border-radius: 28px;
+            padding: 0;
+            margin: 30px 0;
+            overflow: hidden;
+            border: 1px solid #ffe0aa;
+        }
+        .preview-header {
+            background: #d3d3d3;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #bbb;
+        }
+        .preview-logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .preview-logo span {
+            color: #FF8C00;
+        }
+        .preview-nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        .preview-content {
+            padding: 30px;
+        }
+        .preview-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .preview-title span {
+            color: #F9A826;
+            font-size: 28px;
+        }
+        .preview-flex {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .preview-info {
+            flex: 1;
+            min-width: 250px;
+        }
+        .preview-info ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        .preview-info a {
+            color: #F9A826;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .preview-img {
+            flex: 1;
+            text-align: center;
+            font-size: 80px;
+        }
+        .preview-form {
+            max-width: 450px;
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .preview-form h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .preview-form input,
+        .preview-form textarea {
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            font-size: 16px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .preview-form textarea {
+            resize: vertical;
+        }
+        .preview-form input::placeholder,
+        .preview-form textarea::placeholder {
+            color: #F9A826;
+            font-style: italic;
+        }
+        .preview-form button {
+            background: #F9A826;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .preview-form button:hover {
+            background: white;
+            color: #F9A826;
+            border: 2px solid #F9A826;
+        }
+        
+        .task-block {
+            background: #fff0cf;
+            border-radius: 28px;
+            padding: 24px;
+            margin: 35px 0;
+            border-left: 8px solid #FF8C00;
+        }
+        .button-link {
+            display: inline-block;
+            background: #FF8C00;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+            transition: 0.2s;
+        }
+        .button-link:hover {
+            background: #e07a00;
+            transform: scale(1.02);
+        }
+        hr {
+            margin: 25px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ffda9e, transparent);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #ddd8b0;
+            border-radius: 48px;
+            font-size: 14px;
+            color: #4f4f2f;
+        }
+        @media (max-width: 800px) {
+            .wrapper {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .sidebar-item {
+                width: auto;
+                margin: 0;
+            }
+            .main-content {
+                padding: 20px;
+            }
+        }
+        .search-box {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-input {
+            width: 350px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background-color: #D3D3D3;
+            outline: none;
+            font-size: 14px;
+        }
+        .btn-search {
+            padding: 12px 35px;
+            border-radius: 25px;
+            border: none;
+            background-color: #999;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .btn-search:hover {
+            background-color: #888;
+        }
+        .highlight {
+            background-color: #FFD700;
+            color: black;
+            border-radius: 2px;
+        }
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background-color: #FF8C00;
+            color: white;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 13px;
+        }
+        .resource-link {
+            color: #b86f1a;
+            text-decoration: none;
+        }
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"> <a href="index.html"> E-Book<span>Study</span></a></div>
+        <div class="theme-icon"></div>
+    </header>
+
+    <div class="wrapper">
+        <!-- Боковое меню — как в предыдущих работах -->
+        <aside class="sidebar">
+            <a href="intro.html" class="sidebar-item">Вводное занятие</a>
+            <a href="vscode.html" class="sidebar-item">Visual Studio Code</a>
+            <a href="practice.html" class="sidebar-item">Тренажер</a>
+            <a href="links.html" class="sidebar-item">Ссылки и изображения</a>
+            <a href="tables.html" class="sidebar-item">Таблицы</a>
+            <a href="validator.html" class="sidebar-item">Валидность кода</a>
+            <a href="css.html" class="sidebar-item">Основы CSS</a>
+            <a href="text.html" class="sidebar-item">Текст</a>
+            <a href="margins.html" class="sidebar-item active">Отступы</a>
+            <a href="forms.html" class="sidebar-item">Формы</a>
+            <a href="website.html" class="sidebar-item">Мой первый сайт</a>
+            <a href="github.html" class="sidebar-item">GitHub</a>
+            <a href="melodia.html" class="sidebar-item">Верстка ЖК Мелодия</a>
+        </aside>
+
+        <main class="main-content">
+            <h1>🌐 Создание полноценного сайта</h1>
+            <p class="desc">Практическая работа: структура проекта, вёрстка главной страницы, стилизация, формы и контакты. Лектор: Хаятова Лилия Рэхтямовна</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Поиск">
+                <button class="btn-search">Найти</button>
+            </div>
+
+            <!-- 1. Структура проекта -->
+            <div class="theory-block">
+                <h2>📁 1. Структура проекта «Мой первый сайт»</h2>
+                <div class="two-columns">
+                    <div class="info-card">
+                        <span class="badge">📂 Папки и файлы</span>
+                        <div class="code-example" style="font-size: 13px;">
+                            Мой_первый_сайт_ФИ_П-17/<br>
+                            ├── index.html<br>
+                            ├── css/<br>
+                            │   └── style.css<br>
+                            └── img/<br>
+                                └── undraw_web_devices_re_m8sc.svg
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="badge">🖼️ Сервис для поиска иллюстраций</span>
+                        <p><a href="https://undraw.co/search" target="_blank" style="color:#FF8C00;">undraw.co/search</a> — бесплатные SVG-иллюстрации для сайтов.</p>
+                        <p>🔗 <a href="https://www.flaticon.com/ru/" target="_blank" style="color:#FF8C00;">flaticon.com</a> — иконки для контактов и соцсетей.</p>
+                    </div>
+                </div>
+                <div class="code-example">
+                    &lt;!-- Подключение стилей в index.html --&gt;<br>
+                    &lt;link rel="stylesheet" href="css/style.css"&gt;
+                </div>
+            </div>
+
+            <!-- 2. Пример готового сайта (демонстрация) -->
+            <div class="theory-block">
+                <h2>🎨 2. Пример сайта-портфолио верстальщика</h2>
+                <div class="website-preview">
+                    <div class="preview-header">
+                        <div class="preview-logo">E-Book<span>Study</span></div>
+                        <div class="preview-nav">
+                            <a href="#">Главная</a>
+                            <a href="#">Портфолио</a>
+                            <a href="#">Услуги</a>
+                            <a href="#">Контакты</a>
+                        </div>
+                    </div>
+                    <div class="preview-content">
+                        <h1 class="preview-title">Иван Петров<br><span>Junior верстальщик</span></h1>
+                        
+                        <div class="preview-flex">
+                            <div class="preview-info">
+                                <h3>Пара слов обо мне:</h3>
+                                <p>Я начинающий специалист по созданию сайтов. Верстаю простые лендинги, а также сложные сайты типа магазинов, корпоративных сайтов.</p>
+                                <h3>Почему лучше обратиться именно ко мне?</h3>
+                                <ul>
+                                    <li>Верстка HTML/CSS/JS</li>
+                                    <li>Всегда соблюдаю сроки</li>
+                                    <li>Всегда на связи</li>
+                                    <li>Всегда проверяю валидность кода</li>
+                                </ul>
+                                <a href="#">Посмотреть мои работы →</a>
+                            </div>
+                            <div class="preview-img">
+                                🖥️📱💻
+                            </div>
+                        </div>
+                        
+                        <div class="preview-form">
+                            <h3>📝 Заказать вёрстку сайта</h3>
+                            <input type="text" placeholder="Ваше имя">
+                            <input type="tel" placeholder="Ваш телефон">
+                            <input type="email" placeholder="Ваш e-mail">
+                            <textarea rows="3" placeholder="Ваше сообщение"></textarea>
+                            <button>Отправить заявку</button>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px;"><span class="badge">💡 Примечание</span> Это демонстрационный пример. Ваш сайт должен быть создан самостоятельно по инструкции ниже.</p>
+            </div>
+
+            <!-- 3. CSS-стили для сайта -->
+            <div class="theory-block">
+                <h2>🎨 3. CSS-стили для первого сайта</h2>
+                <div class="code-example">
+                    /* style.css — основные стили для сайта */<br><br>
+                    body {<br>
+                    &nbsp;&nbsp;background-color: blueviolet;<br>
+                    }<br><br>
+                    .title {<br>
+                    &nbsp;&nbsp;padding: 30px;<br>
+                    &nbsp;&nbsp;text-align: center;<br>
+                    &nbsp;&nbsp;font-size: 50px;<br>
+                    }<br><br>
+                    .title span {<br>
+                    &nbsp;&nbsp;color: #F9A826;<br>
+                    &nbsp;&nbsp;font-size: 40px;<br>
+                    }<br><br>
+                    .main, .main2 {<br>
+                    &nbsp;&nbsp;display: flex;<br>
+                    &nbsp;&nbsp;justify-content: center;<br>
+                    &nbsp;&nbsp;align-items: center;<br>
+                    &nbsp;&nbsp;flex-wrap: wrap;<br>
+                    }<br><br>
+                    .main img {<br>
+                    &nbsp;&nbsp;max-width: 600px;<br>
+                    }<br><br>
+                    .main-info {<br>
+                    &nbsp;&nbsp;max-width: 500px;<br>
+                    }<br><br>
+                    .main-info a {<br>
+                    &nbsp;&nbsp;font-size: 20px;<br>
+                    &nbsp;&nbsp;color: #F9A826;<br>
+                    &nbsp;&nbsp;text-decoration: none;  /* отмена подчеркивания */<br>
+                    }<br><br>
+                    .form {<br>
+                    &nbsp;&nbsp;max-width: 420px;<br>
+                    &nbsp;&nbsp;margin: 50px auto;<br>
+                    &nbsp;&nbsp;display: flex;<br>
+                    &nbsp;&nbsp;flex-direction: column;<br>
+                    }<br><br>
+                    .form input, .form textarea {<br>
+                    &nbsp;&nbsp;padding: 10px;<br>
+                    &nbsp;&nbsp;font-size: 23px;<br>
+                    &nbsp;&nbsp;border-radius: 10px;<br>
+                    &nbsp;&nbsp;margin-bottom: 20px;<br>
+                    &nbsp;&nbsp;border: 2px solid rgb(175, 171, 171);<br>
+                    &nbsp;&nbsp;font-family: 'Times New Roman', Times, serif;<br>
+                    }<br><br>
+                    input::placeholder, textarea::placeholder {<br>
+                    &nbsp;&nbsp;color: #F9A826;<br>
+                    &nbsp;&nbsp;font-style: italic;  /* курсив */<br>
+                    }<br><br>
+                    .form button {<br>
+                    &nbsp;&nbsp;background-color: #F9A826;<br>
+                    &nbsp;&nbsp;padding: 16px;<br>
+                    &nbsp;&nbsp;border-radius: 10px;<br>
+                    &nbsp;&nbsp;font-size: 20px;<br>
+                    &nbsp;&nbsp;border: 3px solid #F9A826;<br>
+                    &nbsp;&nbsp;color: white;<br>
+                    &nbsp;&nbsp;text-transform: uppercase;  /* заглавные буквы */<br>
+                    &nbsp;&nbsp;cursor: pointer;<br>
+                    }<br><br>
+                    .form button:hover {<br>
+                    &nbsp;&nbsp;background-color: white;<br>
+                    &nbsp;&nbsp;color: black;<br>
+                    &nbsp;&nbsp;border: 3px solid #F9A826;<br>
+                    }
+                </div>
+            </div>
+
+            <!-- 4. Практическая работа -->
+            <div class="task-block">
+                <h3 style="color:#a55302; margin-top:0;">📌 Практическая работа: «Мой первый сайт»</h3>
+                <p><strong>Пошаговая инструкция:</strong></p>
+                <ul class="step-list" style="margin-left: 0;">
+                    <li>Создайте проект <strong>«Мой первый сайт_ФИ_П-17»</strong> (где ФИ — ваши инициалы, П-17 — номер группы).</li>
+                    <li>В проекте создайте папку <strong>css</strong> и папку <strong>img</strong>.</li>
+                    <li>Создайте файл <strong>index.html</strong> и файл <strong>css/style.css</strong>.</li>
+                    <li>Скачайте иллюстрацию с <a href="https://undraw.co/search" target="_blank" class="resource-link">undraw.co</a> и сохраните в папку <strong>img</strong>.</li>
+                    <li>Сверстайте главную страницу по образцу из демонстрации выше:
+                        <ul style="margin-left: 25px; margin-top: 10px;">
+                            <li>Заголовок с вашим именем и должностью (Junior верстальщик)</li>
+                            <li>Блок «О себе» с текстом и списком преимуществ</li>
+                            <li>Изображение (иллюстрация)</li>
+                            <li>Ссылку «Посмотреть мои работы»</li>
+                            <li>Форму заявки: имя, телефон, email, многострочное сообщение, кнопка</li>
+                        </ul>
+                    </li>
+                    <li>Подключите файл стилей к HTML-документу.</li>
+                    <li>Настройте стили по образцу выше (или создайте свои).</li>
+                </ul>
+                <hr>
+                <h3 style="color:#a55302; margin-top: 15px;">✏️ Задание для самостоятельной работы</h3>
+                <ol style="margin-left: 25px; margin-top: 10px;">
+                    <li>Поменяйте фон страницы (свойство <span class="inline-code">background-color</span>).</li>
+                    <li>Отмените подчеркивание у ссылки «Посмотреть мои работы» (уже есть в примере — <span class="inline-code">text-decoration: none;</span>).</li>
+                    <li>Добавьте на сайт блок с контактами (телефон, email, соцсети), добавьте иконки в цвет вашего дизайна с <a href="https://www.flaticon.com/ru/" target="_blank" class="resource-link">flaticon.com</a>, добавьте картинку к этому блоку.</li>
+                    <li>Поменяйте в форме цвет текста, сделайте его курсивом (через <span class="inline-code">font-style: italic;</span>).</li>
+                    <li>Поменяйте в форме тип шрифта на <span class="inline-code">'Times New Roman', Times, serif</span>.</li>
+                    <li>Сделайте в кнопке текст заглавными буквами через CSS (<span class="inline-code">text-transform: uppercase;</span>).</li>
+                    <li>В форму заявки перед кнопкой добавьте поле многострочного текста (<span class="inline-code">&lt;textarea&gt;</span>) с подсказкой «Ваше сообщение».</li>
+                    <li>Измените стили этого поля, как во всей форме (единый дизайн).</li>
+                </ol>
+                <hr>
+                <p><span class="badge" style="background:#b4682d;">🎯 Онлайн-редактор для экспериментов</span></p>
+                <p><a href="https://codepen.io/pen/" target="_blank" class="button-link" style="background:#bb741f;">🚀 Открыть CodePen</a></p>
+                <p style="margin-top: 12px; font-size: 14px;">🔗 Прямая ссылка: https://codepen.io/pen/</p>
+            </div>
+
+            <!-- 5. Рекомендации -->
+            <div class="theory-block">
+                <h2>💡 5. Полезные советы</h2>
+                <ul style="margin-left: 22px;">
+                    <li>Используйте <span class="inline-code">display: flex</span> для удобного расположения блоков.</li>
+                    <li>Для изображений всегда указывайте атрибут <span class="inline-code">alt</span>.</li>
+                    <li>Проверяйте валидность кода на <a href="https://validator.w3.org/" target="_blank" class="resource-link">validator.w3.org</a>.</li>
+                    <li>Используйте <span class="inline-code">::placeholder</span> для стилизации текста-подсказки в полях ввода.</li>
+                    <li>Для кнопки добавьте эффект при наведении (<span class="inline-code">:hover</span>).</li>
+                    <li>Адаптивность: используйте <span class="inline-code">flex-wrap: wrap</span> и медиа-запросы.</li>
+                </ul>
+            </div>
+
+            <!-- 6. Дополнительные ресурсы -->
+            <div class="theory-block">
+                <h2>📚 6. Полезные ресурсы</h2>
+                <ul style="margin-left: 22px;">
+                    <li>📘 <a href="https://undraw.co/search" target="_blank" class="resource-link">undraw.co</a> — бесплатные SVG-иллюстрации</li>
+                    <li>🎨 <a href="https://www.flaticon.com/ru/" target="_blank" class="resource-link">flaticon.com</a> — иконки для сайтов</li>
+                    <li>🔍 <a href="https://codepen.io/pen/" target="_blank" class="resource-link">CodePen</a> — онлайн-редактор для экспериментов</li>
+                    <li>📖 <a href="https://html5book.ru/" target="_blank" class="resource-link">html5book.ru</a> — справочник по HTML и CSS</li>
+                </ul>
+            </div>
+
+            <footer>
+                📘 E-BookStudy · Мой первый сайт. Создайте своё портфолио верстальщика с нуля!
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Функция поиска и подсветки
+        function performSearch(inputElement, container) {
+            if (!inputElement || !container) return;
+            const query = inputElement.value.trim();
+            removeHighlights();
+            if (query === "") return;
+
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const nodesToReplace = [];
+
+            while (node = walker.nextNode()) {
+                if (node.parentNode.tagName === 'SCRIPT' ||
+                    node.parentNode.tagName === 'STYLE' ||
+                    node.parentNode.tagName === 'INPUT' ||
+                    node.parentNode.tagName === 'TEXTAREA') continue;
+
+                if (node.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            nodesToReplace.forEach(node => {
+                const span = document.createElement('span');
+                span.innerHTML = node.textContent.replace(regex, '<mark class="highlight">$1</mark>');
+                node.parentNode.replaceChild(span, node);
+            });
+
+            const firstResult = container.querySelector('.highlight');
+            if (firstResult) {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert("Ничего не найдено");
+            }
+        }
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(h => {
+                const parent = h.parentNode;
+                const text = parent.textContent;
+                const textNode = document.createTextNode(text);
+                parent.replaceWith(textNode);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('.main-content');
+            if (!main) return;
+
+            document.querySelectorAll('.btn-search').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const searchBox = btn.closest('.search-box');
+                    const input = searchBox.querySelector('.search-input');
+                    performSearch(input, main);
+                });
+            });
+
+            document.querySelectorAll('.search-input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchBox = input.closest('.search-box');
+                        const btn = searchBox.querySelector('.btn-search');
+                        if (btn) btn.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
